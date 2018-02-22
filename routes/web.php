@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/',                'SiteController@home');
-Route::get('/classroom/{id}',  'SiteController@classroom');
-Route::get('/forum/{id}',      'ForumController@home');
+Route::get('/', 'SiteController@home');
+Route::get('/classroom/{id}', 'SiteController@classroom');
+
+Route::group(['prefix' => '/forum/{fId}'], function () {
+    Route::get('/', 'ForumController@home');
+    Route::get('/{sId}', 'ForumController@section');
+    Route::get('/{sId}/{tId}', 'ForumController@topic');
+});
