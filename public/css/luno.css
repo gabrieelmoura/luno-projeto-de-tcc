@@ -52,9 +52,9 @@
   color: white;
   font-weight: bolder;
   float: left;
-  font-size: 18px;
+  font-size: 12px;
   background-color: #013243;
-  padding: 6px 15px;
+  padding: 7px 12px;
   border-radius: 50%;
 }
 
@@ -65,6 +65,15 @@
 
 #topbar__form .form-control {
   width: 600px;
+  height: 30px;
+  font-size: 14px;
+}
+
+#topbar__form .btn.btn-primary {
+  height: 30px;
+  font-size: 14px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #topbar__nav {
@@ -82,7 +91,12 @@
 #topbar__nav ul li a {
   display: block;
   color: white;
-  padding: 7px 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+#topbar__nav .dropdown-menu a {
+  color: black;
 }
 
 #mainfooter {
@@ -339,6 +353,50 @@
   margin-bottom: 10px;
   color: gray;
   font-weight: bolder;
+}
+
+#loginpanel {
+  padding: 60px 40px;
+}
+
+#profilepanel {
+  padding: 40px;
+}
+
+#profilepanel__user-name {
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0;
+}
+
+#profilepanel__side-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+#profilepanel__side-nav li {
+  list-style: none;
+}
+
+#profilepanel__side-nav li + li {
+  border-top: solid 1px lightgray;
+}
+
+#profilepanel__side-nav a {
+  padding: 10px 5px;
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+#profilepanel__side-nav a:hover {
+  background-color: ghostwhite;
+}
+
+.profilepanel__title {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 body {

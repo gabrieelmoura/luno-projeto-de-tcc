@@ -1,0 +1,41 @@
+#profilepanel {
+  padding: 40px;
+}
+
+#profilepanel__user-name {
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0;
+}
+
+#profilepanel__side-nav {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li + li {
+    border-top: solid 1px lightgray;
+  }
+
+  a {
+    padding: 10px 5px;
+    display: block;
+    color: #000;
+    text-decoration: none;
+
+    &:hover {
+      background-color: ghostwhite;
+    }
+  }
+}
+
+.profilepanel__title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
