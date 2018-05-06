@@ -3,17 +3,34 @@
 @import 'global/forms';
 
 @import 'components/classroom-list';
+@import 'components/top-banner';
 
 @import 'pages/layout';
 @import 'pages/homepage';
-@import 'pages/classroom';
+@import 'pages/course';
 @import 'pages/forum';
-@import 'pages/loginPage';
 @import 'pages/profile';
+@import 'pages/new-course';
+@import 'pages/new-classroom';
+@import 'pages/login-page';
+@import 'pages/edit-profile';
 
 body {
   font-family: 'Montserrat', sans-serif;
   color: black;
+}
+
+.luno-title {
+  text-align: center;
+  margin: 0 auto 20px auto;
+  font-size: 30px;
+  border-bottom: solid 1px black;
+  padding-bottom: 5px;
+}
+
+.luno-content {
+  padding: $screen-margin;
+  min-height: calc(100vh - 85px);
 }
 
 a {

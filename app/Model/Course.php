@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $table = "luno_courses";
+    protected $fillable = [
+        'course_name', 'subtitle', 'description'
+    ];
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
 
     public function institution()
     {
@@ -21,5 +27,15 @@ class Course extends Model
     public function classrooms()
     {
         return $this->hasMany(Classroom::class, "course_id", "id");
+    }
+
+    public function openClassrooms()
+    {
+        return $this->hasMany(Classroom::class, "course_id", "id");
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Media::class, "image_id", "id");
     }
 }

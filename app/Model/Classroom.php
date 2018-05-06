@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Classroom extends Model
 {
     protected $table = "luno_classrooms";
+    protected $fillable = [
+        'start_date', 'end_date', 'hidden', 'max_students', 'description', 'welcome_text'
+    ];
 
     public function course()
     {
@@ -40,6 +43,6 @@ class Classroom extends Model
 
     public function registrations()
     {
-        return $this->hasMany(Registration::class, "classroom_id", "id");
+        return $this->belongsToMany(User::class, "luno_user_classroom");
     }
 }

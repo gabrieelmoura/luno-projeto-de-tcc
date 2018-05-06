@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     protected $table = "luno_users";
+    protected $fillable = [
+        'user_name', 'birthdate', 'job', 'about'
+    ];
+    protected $dates = [
+        'birthdate'
+    ];
 
     public function getAuthPassword()
     {
@@ -21,6 +27,6 @@ class User extends Authenticatable
 
     public function registrations()
     {
-        return $this->hasMany(Registration::class, "user_id", "id");
+        return $this->belongsToMany(Classroom::class, "luno_user_classroom");
     }
 }

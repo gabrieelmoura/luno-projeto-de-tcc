@@ -6,6 +6,10 @@
   border-radius: 0;
 }
 
+.control-label {
+  font-weight: bolder;
+}
+
 .classroom-list {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -41,6 +45,17 @@
 
 .classroom-box__actions {
   margin-top: 10px;
+}
+
+.luno-top-banner {
+  background-size: cover;
+  background-position: center;
+  border-bottom: solid 20px #013243;
+}
+
+.luno-top-banner__content {
+  height: 240px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #topbar {
@@ -167,48 +182,48 @@
   font-weight: bolder;
 }
 
-.classroom-details header {
+.course-details header {
   background-color: #013243;
   color: white;
   padding: 20px;
 }
 
-.classroom-details header h1 {
+.course-details header h1 {
   font-weight: 100;
   font-size: 40px;
 }
 
-.classroom-details__header__content {
+.course-details__header__content {
   float: left;
   margin-top: -10px;
 }
 
-.classroom-details__front-img {
+.course-details__front-img {
   float: left;
   max-width: 300px;
   min-height: 198px;
   margin-right: 10px;
 }
 
-.classroom-details main {
+.course-details main {
   padding: 20px;
 }
 
-.classroom-details__infos {
+.course-details__infos {
   font-size: 14px;
 }
 
-.classroom-details__related {
+.course-details__related {
   padding: 20px;
   color: white;
   background-color: #446CB3;
 }
 
-.classroom-details__related a {
+.course-details__related a {
   color: white;
 }
 
-.classroom-details__teacher__img {
+.course-details__teacher__img {
   float: left;
   width: 150px;
   height: 150px;
@@ -217,12 +232,12 @@
      object-fit: cover;
 }
 
-.classroom-details__teacher__bio {
+.course-details__teacher__bio {
   float: left;
   width: calc(100% - 210px);
 }
 
-.classroom-details__teacher h3 {
+.course-details__teacher h3 {
   font-size: 20px;
 }
 
@@ -355,10 +370,6 @@
   font-weight: bolder;
 }
 
-#loginpanel {
-  padding: 60px 40px;
-}
-
 #profilepanel {
   padding: 40px;
 }
@@ -399,9 +410,34 @@
   margin-bottom: 10px;
 }
 
+.luno-top-banner-new-course {
+  background-image: url(/img/criar-curso-banner.jpg);
+}
+
+.luno-top-banner-new-classroom {
+  background-image: url(/img/new-classroom-banner.jpg);
+}
+
+#loginpanel {
+  padding: 60px 40px;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   color: black;
+}
+
+.luno-title {
+  text-align: center;
+  margin: 0 auto 20px auto;
+  font-size: 30px;
+  border-bottom: solid 1px black;
+  padding-bottom: 5px;
+}
+
+.luno-content {
+  padding: 20px;
+  min-height: calc(100vh - 85px);
 }
 
 a {

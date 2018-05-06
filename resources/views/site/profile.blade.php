@@ -1,7 +1,7 @@
 @extends('site.layout')
 
 @section('site.content')
-    <section id="profilepanel">
+    <section class="luno-content">
         <div class="row">
             <div class="col-md-2">
                 @if($user->avatar)
@@ -12,7 +12,6 @@
                 <nav id="profilepanel__side-nav">
                     <ul>
                         <li><a href="#">Editar Perfil</a></li>
-                        <li><a href="#">Trocar Foto</a></li>
                         <li><a href="#">Sair</a></li>
                     </ul>
                 </nav>
@@ -36,9 +35,45 @@
                             {{ $user->email }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Nascimento
+                        </th>
+                        <td>
+                            {{ $user->birthdate->format('d/m/Y') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Ocupação
+                        </th>
+                        <td>
+                            {{ $user->job }}
+                        </td>
+                    </tr>
                 </table>
-                <h2 class="profilepanel__title">Dados Acadêmicos</h2>
+                <h2 class="profilepanel__title">Sobre</h2>
+                <div>{{ $user->about }}</div>
+                <br>
                 <h2 class="profilepanel__title">Turmas</h2>
+                @if($user->registrations->count())
+                    <table>
+                        <tbody>
+                            @foreach($user->registrations as $registration)
+                                <tr>
+                                    <td>
+                                        {{ $registration->description }}
+                                    </td>
+                                    <td>
+                                        {{ $registration->course->course_name }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else 
+                    Este usuário não está frequentando nenhuma turma no momento.
+                @endif
             </div>
         </div>
     </section>

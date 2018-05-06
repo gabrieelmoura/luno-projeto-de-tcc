@@ -17,4 +17,22 @@ class Media extends Model
     {
         return $this->belongsTo(Media::class, "owner_id", "id");
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($media) {
+        });
+    }
+
+    public static function newFromUploadedFile($file, $type)
+    {
+        $media = new Media;
+        $media->mime = $file->getMimeType();
+        $media->size = $file->getClientSize();
+        $media->location = str_replace("public/", "/storage/", $file->store('public/' . $type));
+        $media->media_type = $type;
+        return $media;
+    }
 }

@@ -1,3 +1,5 @@
+use luno;
+
 -- ####################################################################################################
 -- # Criação 29/03/2018
 -- ####################################################################################################
@@ -223,4 +225,16 @@ create table luno_user_course(
     updated_at timestamp null
 );
 
+-- ####################################################################################################
+-- # Atualizações: 06/05/2018
+-- ####################################################################################################
 
+alter table luno_courses add column subtitle varchar(124);
+alter table luno_courses add column description text;
+alter table luno_courses add column image_id int;
+alter table luno_courses add column category_id int;
+alter table luno_classrooms add column max_students int;
+alter table luno_classrooms add column description varchar(124);
+alter table luno_classrooms add column welcome_text text;
+alter table luno_users add column job varchar(124);
+alter table luno_users add column about text;
