@@ -31,7 +31,7 @@ create table luno_institutions(
 
 create table luno_courses(
 	id int primary key auto_increment,
-    course_name varchar(128) not null, 
+    course_name varchar(128) not null,
     institution_id int,
     creator_id int not null,
     created_at timestamp default current_timestamp,
@@ -239,3 +239,10 @@ alter table luno_classrooms add column welcome_text text;
 alter table luno_users add column job varchar(124);
 alter table luno_users add column about text;
 rename table luno_chapter to luno_chapters;
+
+
+-- ####################################################################################################
+-- # Atualizações: 07/05/2018
+-- ####################################################################################################
+
+alter table luno_sections change column id id int auto_increment;

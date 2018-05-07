@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $table = "luno_tasks";
+    protected $fillable = [
+        'deadline', 'title', 'description', 'weight'
+    ];
+    protected $dates = [
+        'deadline'
+    ];
 
     public function creator()
     {

@@ -19,31 +19,28 @@
         <p>
             {{ $classroom->welcome_text }}
         </p>
-        <h2>Tarefas Pendentes</h2>
+        <h2>Tarefas</h2>
         <table class="table">
             <tbody>
-                <tr>
-                    <td>
-                        Atividade 2
-                    </td>
-                    <td class="text-right">
-                        Até 18/02/2018
-                    </td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-sm btn-primary">Marcar Conclusão</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Primeira prova online
-                    </td>
-                    <td class="text-right">
-                        Até 18/02/2018
-                    </td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-sm btn-primary">Marcar Conclusão</a>
-                    </td>
-                </tr>
+                @forelse($classroom->tasks as $task)
+                    <tr>
+                        <td>
+                            {{ $task->title }}
+                        </td>
+                        <td class="text-right">
+                            Até {{ $task->deadline->format('d/m/Y') }}
+                        </td>
+                        <td class="text-right">
+                            <a href="#" class="btn btn-sm btn-primary">Ver Tarefa</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3">
+                            Nenhuma Tarefa
+                        </td>
+                    </tr>
+                @endforelse
                 <tr>
                     <td colspan="3">
                         <a href="#" class="btn-sm btn-success btn">
@@ -61,44 +58,25 @@
         <h2>Fórum</h2>
         <table class="table">
             <tbody>
+                @forelse($classroom->sections as $section)
+                    <tr>
+                        <td>
+                            <a href="#"><h4>{{ $section->title }}</h4></a>
+                            {{ $section->subtitle }}
+                        </td>
+                        <td class="text-right" style="vertical-align: middle">
+                            {{ $section->topics_count }} posts
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="2">
+                            Este forum ainda não possui nenhuma sessão
+                        </td>
+                    </tr>
+                @endforelse
                 <tr>
-                    <td>
-                        <a href="#"><h4>Apresentação</h4></a>
-                        Apresentem-se para seus colegas de classe!
-                    </td>
-                    <td class="text-right">
-                        12 posts
-                    </td>
-                    <td class="text-right">
-                        100 mensagens
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#"><h4>Dúvidas</h4></a>
-                        Postem suas dúvidas em relação ao material
-                    </td>
-                    <td class="text-right">
-                        12 posts
-                    </td>
-                    <td class="text-right">
-                        100 mensagens
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#"><h4>Primeiro Trabalho</h4></a>
-                        Siga as instruções do post fixado para a entrega do trabalho
-                    </td>
-                    <td class="text-right">
-                        12 posts
-                    </td>
-                    <td class="text-right">
-                        100 mensagens
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
+                    <td colspan="2">
                         <a href="#" class="btn-sm btn-success btn">
                             <i class="fa fa-plus"></i> Criar Nova Sessão
                         </a>
