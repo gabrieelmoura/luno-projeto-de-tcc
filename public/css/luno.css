@@ -114,6 +114,10 @@
   color: black;
 }
 
+#topbar__nav .dropdown-menu a:active {
+  color: white;
+}
+
 #mainfooter {
   background-color: #013243;
   color: white;
@@ -282,7 +286,6 @@
   font-size: 30px;
   font-weight: 100;
   border-bottom: solid 1px black;
-  margin-bottom: 20px;
 }
 
 #forum__content h2 {
@@ -294,6 +297,12 @@
   font-size: 16px;
   color: gray;
   margin-bottom: 2px;
+}
+
+.forum__course-name {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: gray;
 }
 
 .forum__nav__label {
@@ -438,6 +447,19 @@ body {
 .luno-content {
   padding: 20px;
   min-height: calc(100vh - 85px);
+}
+
+.luno-title-buttons-holder {
+  position: relative;
+}
+
+.luno-title-buttons {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 12px;
 }
 
 a {

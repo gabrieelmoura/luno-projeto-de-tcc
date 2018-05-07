@@ -19,8 +19,8 @@
                         {{ request()->error }}
                     </div>
                     <div class="form-group">
-                        <input type="checkbox">
-                        <label for="" class="control-label">
+                        <input type="checkbox" name="keep" id="forms__login__keep">
+                        <label for="forms__login__keep" class="control-label">
                             Permanecer Conectado
                         </label>
                     </div>

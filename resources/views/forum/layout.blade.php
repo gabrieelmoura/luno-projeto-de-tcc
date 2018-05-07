@@ -42,6 +42,14 @@
                     <li><a href="#">Primeiro Trabalho</a></li>
                 </ul>
             </nav>
+            <div class="forum__nav__label">Pedagógico</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Aprovar Matriculas</a></li>
+                    <li><a href="#">Postar Material</a></li>
+                    <li><a href="#">Lançar Notas</a></li>
+                </ul>
+            </nav>
             <div class="forum__nav__label">Material</div>
             <nav>
                 <ul>

@@ -238,3 +238,4 @@ alter table luno_classrooms add column description varchar(124);
 alter table luno_classrooms add column welcome_text text;
 alter table luno_users add column job varchar(124);
 alter table luno_users add column about text;
+rename table luno_chapter to luno_chapters;

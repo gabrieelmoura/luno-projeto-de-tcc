@@ -11,24 +11,32 @@
 |
 */
 
-Route::get('/', 'SiteController@home');
-Route::get('/course/{id}', 'SiteController@course');
-Route::get('/login', 'SiteController@loginPage');
-Route::get('/profile', 'SiteController@profile');
+Route::get('/', 'SiteController@home')->name('site.home');
+Route::get('/course/{id}', 'SiteController@course')->name('site.course');
+Route::get('/login', 'SiteController@loginPage')->name('login');
+Route::get('/profile', 'SiteController@profile')->name('site.profile');
 
-Route::post('/auth', 'LoginController@auth');
-Route::get('/logout', 'LoginController@logout');
+Route::post('/auth', 'LoginController@auth')->name('login.auth');
+Route::get('/logout', 'LoginController@logout')->name('login.logout');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/editar-perfil', 'SiteController@editProfile');
-    Route::post('/editar-perfil', 'SiteController@editProfileAction');
-    Route::get('/novo-curso', 'SiteController@newCourse');
-    Route::post('/novo-curso', 'SiteController@newCourseAction');
-    Route::get('/nova-turma/{id}', 'SiteController@newClassroom');
-    Route::post('/nova-turma/{id}', 'SiteController@newClassroomAction');
+    Route::get('/editar-perfil', 'SiteController@editProfile')->name('site.edit-profile');
+    Route::post('/editar-perfil', 'SiteController@editProfileAction')->name('site.edit-profile-action');
     
-    Route::get('/forum/{id}', 'ForumController@home');
-    Route::get('/section/{id}', 'ForumController@section');
-    Route::get('/topic/{id}', 'ForumController@topic');
+    Route::get('/novo-curso', 'SiteController@newCourse')->name('site.new-course');
+    Route::post('/novo-curso', 'SiteController@newCourseAction')->name('site.new-course-action');
+    
+    Route::get('/nova-turma/{id}', 'SiteController@newClassroom')->name('site.new-classroom');
+    Route::post('/nova-turma/{id}', 'SiteController@newClassroomAction')->name('site.new-classroom-action');;
+
+    Route::get('/forum/{id}/editar-quadro', 'ForumController@editWelcomeText')->name('forum.edit-welcome-text');
+    Route::post('/forum/{id}/editar-quadro', 'ForumController@editWelcomeTextAction')->name('forum.edit-welcome-text-action');
+    
+    Route::get('/forum/{id}/nova-tarefa', 'ForumController@newTask')->name('forum.new-task');
+    Route::post('/forum/{id}/nova-tarefa', 'ForumController@newTaskAction')->name('forum.new-task-action');
+
+    Route::get('/forum/{id}', 'ForumController@home')->name('forum.home');
+    Route::get('/section/{id}', 'ForumController@section')->name('forum-section');
+    Route::get('/topic/{id}', 'ForumController@topic')->name('forum.topic');
 });
 

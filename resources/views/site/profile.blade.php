@@ -11,8 +11,8 @@
                 @endif
                 <nav id="profilepanel__side-nav">
                     <ul>
-                        <li><a href="#">Editar Perfil</a></li>
-                        <li><a href="#">Sair</a></li>
+                        <li><a href="/editar-perfil">Editar Perfil</a></li>
+                        <li><a href="/logout">Sair</a></li>
                     </ul>
                 </nav>
             </div>

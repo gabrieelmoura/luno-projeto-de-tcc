@@ -28,7 +28,7 @@ class Classroom extends Model
 
     public function chapters()
     {
-        return $this->hasMany(Chapter::class, "classrooom_id", "id");
+        return $this->hasMany(Chapter::class, "classroom_id", "id");
     }
 
     public function tasks()

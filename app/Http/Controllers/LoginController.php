@@ -15,7 +15,7 @@ class LoginController
         if (Auth::attempt([
             'email' => request()->email,
             'password' => request()->user_password
-        ])) return redirect('/');
+        ], (bool) request('keep'))) return redirect('/');
         return redirect()->back()->withInput()->withErrors(['auth' => __('auth.failed')]);
     }
 

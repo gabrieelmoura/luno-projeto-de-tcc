@@ -24,7 +24,7 @@
                 <label class="control-label">
                     Data de Nascimento*
                 </label>
-                <input type="text" name="birthdate" class="form-control" value="{{ old('birthdate', $user->birthdate) }}">
+                <input type="date" name="birthdate" class="form-control" value="{{ old('birthdate', $user->birthdate->format('Y-m-d')) }}">
             </div>
             <div class="form-group">
                 <label class="control-label">

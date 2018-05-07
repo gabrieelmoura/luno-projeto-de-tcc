@@ -3,12 +3,21 @@
 @section('forum.content')
     <div>
         <h1>
-            Segurança da Informação
+            {{ $classroom->course->course_name }}
         </h1>
-        <h2>Quadro de Avisos</h2>
+        <h3 class="forum__course-name">
+            {{ $classroom->description }}
+        </h3>
+        <div class="luno-title-buttons-holder">
+            <h2>Quadro de Avisos</h2>
+            <div class="luno-title-buttons">
+                <a href="/forum/{{ $classroom->id }}/editar-quadro" class="btn-sm btn-primary btn">
+                    <i class="fa fa-pencil"></i> Editar
+                </a>
+            </div>
+        </div>
         <p>
-            Alunos, por favor não se esqueçam de entregar a atividade 4.<br>
-            Não deixem para a ultima hora.
+            {{ $classroom->welcome_text }}
         </p>
         <h2>Tarefas Pendentes</h2>
         <table class="table">
@@ -35,51 +44,18 @@
                         <a href="#" class="btn btn-sm btn-primary">Marcar Conclusão</a>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="3">
+                        <a href="#" class="btn-sm btn-success btn">
+                            <i class="fa fa-plus"></i> Criar Nova Tarefa
+                        </a>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <h2>Ultimas Atividades</h2>
         <table class="table">
             <tbody>
-                <tr>
-                    <td>
-                        Nathália Lemos respondeu no tópico Duvidas
-                    </td>
-                    <td>
-                        10 minutos atrás
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nathália Lemos respondeu no tópico Duvidas
-                    </td>
-                    <td>
-                        10 minutos atrás
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nathália Lemos respondeu no tópico Duvidas
-                    </td>
-                    <td>
-                        10 minutos atrás
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nathália Lemos respondeu no tópico Duvidas
-                    </td>
-                    <td>
-                        10 minutos atrás
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Nathália Lemos respondeu no tópico Duvidas
-                    </td>
-                    <td>
-                        10 minutos atrás
-                    </td>
-                </tr>
             </tbody>
         </table>
         <h2>Fórum</h2>
@@ -119,6 +95,13 @@
                     </td>
                     <td class="text-right">
                         100 mensagens
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <a href="#" class="btn-sm btn-success btn">
+                            <i class="fa fa-plus"></i> Criar Nova Sessão
+                        </a>
                     </td>
                 </tr>
             </tbody>

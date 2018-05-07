@@ -46,7 +46,7 @@
                                 {{ Auth::user()->user_name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowns__turmas">
-                                <a class="dropdown-item">Criar um curso</a>
+                                <a class="dropdown-item" href="/novo-curso">Criar um curso</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/profile">Ver Perfil</a>
                                 <a class="dropdown-item" href="/logout">Sair</a>
