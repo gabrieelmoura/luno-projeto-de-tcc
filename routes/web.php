@@ -39,6 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/forum/{id}/nova-sessao', 'ForumController@newSectionAction')->name('forum.new-section-action');
 
     Route::get('/forum/{id}', 'ForumController@home')->name('forum.home');
-    Route::get('/section/{id}', 'ForumController@section')->name('forum-section');
+    Route::get('/section/{id}', 'ForumController@section')->name('forum.section');
     Route::get('/topic/{id}', 'ForumController@topic')->name('forum.topic');
 });

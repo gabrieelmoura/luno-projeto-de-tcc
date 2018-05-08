@@ -449,11 +449,11 @@ body {
   min-height: calc(100vh - 85px);
 }
 
-.luno-title-buttons-holder {
+.luno-floating-buttons-holder {
   position: relative;
 }
 
-.luno-title-buttons {
+.luno-floating-buttons {
   position: absolute;
   right: 0;
   top: 50%;

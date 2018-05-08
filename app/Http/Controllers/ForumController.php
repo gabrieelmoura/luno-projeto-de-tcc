@@ -66,9 +66,11 @@ class ForumController extends Controller {
         return redirect(route('forum.home', compact('id')));
     }
 
-    public function section()
+    public function section($id)
     {
-        return view('forum.section');
+        return view('forum.section', [
+            'section' => Section::find($id)
+        ]);
     }
 
     public function topic()

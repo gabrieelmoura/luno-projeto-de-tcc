@@ -2,11 +2,26 @@
 
 @section('forum.content')
     <div>
-        <h1>Tópicos</h1>
+        <h1>{{ $section->title }}</h1>
+
+        <h3 class="forum__course-name">
+            {{ $section->subtitle }}
+        </h3>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-sm" style="margin-top: -5px">
+                <i class="fa fa-plus"></i> Criar Tópico
+            </button>
+            <button class="btn btn-primary btn-sm" style="margin-top: -5px">
+                <i class="fa fa-filter"></i> Filtros
+            </button>
+        </div>
+
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Sistemas de Informação</a></li>
-            <li class="breadcrumb-item active">Duvidas</li>
+            <li class="breadcrumb-item active">{{ $section->title }}</li>
         </ol>
+
         <table class="table table-striped table-right-aligned">
             <thead>
                 <tr>
