@@ -23,9 +23,13 @@ class SiteController extends Controller {
     }
 
     public function course($id) {
-        return view('site.course', [
-            'course' => Course::whereId($id)->with(['image', 'creator', 'openClassrooms.registrations'])->first()
-        ]);
+        $course = Course::with([
+            'image', 'creator', 'openClassrooms' => function ($query) {
+                $query->withCount('students');
+                $query->with('myRegistrations');
+            }
+        ])->find($id);
+        return view('site.course', compact('course'));
     }
 
     public function loginPage() {
@@ -76,6 +80,10 @@ class SiteController extends Controller {
         $classroom->course_id = request('course_id');
         $classroom->hidden = (bool) request('hidden');
         $classroom->save();
+        $classroom->registrations()->attach(\Auth::id(), [
+            'approved' => true,
+            'role' => 'teacher'
+        ]);
         return redirect('/forum/' . $classroom->id);
     }
 
@@ -100,6 +108,13 @@ class SiteController extends Controller {
         }
         $user->save();
         return redirect('/profile');
+    }
+
+    public function register()
+    {
+        $classroom = Classroom::find(request('id'));
+        $classroom->registrations()->attach(\Auth::id());
+        return redirect()->back();
     }
 
 }

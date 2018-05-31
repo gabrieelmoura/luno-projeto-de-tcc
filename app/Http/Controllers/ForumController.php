@@ -145,4 +145,34 @@ class ForumController extends Controller {
         return view('forum.chapter', ['classroom' => $this->classroom, 'chapter' => $chapter ]);
     }
 
+    public function registrations()
+    {
+        $this->classroom->loadDefault();
+        $this->classroom->load(['registrations' => function ($query) {
+            $query->wherePivot('approved', false);
+        }]);
+        return view('forum.registrations', ['classroom' => $this->classroom]);
+    }
+
+    public function registrationsAction()
+    {
+        if (request('approve')) {
+            $this->classroom->registrations()->updateExistingPivot(request('user_id'), [
+                'approved' => true
+            ]);
+        } else {
+            $this->classroom->registrations()->detach(request('user_id'));
+        }
+        return redirect()->back();
+    }
+
+    public function students()
+    {
+        $this->classroom->loadDefault();
+        $this->classroom->load(['registrations' => function ($query) {
+            $query->wherePivot("approved", true);
+        }]);
+        return view('forum.students', ['classroom' => $this->classroom]);
+    }
+
 }

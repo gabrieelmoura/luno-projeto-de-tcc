@@ -29,9 +29,6 @@
                 </div>
                 <br>
                 <div class="course-details__infos">
-                    <div>
-                        Nota: 10 <span class="fa fa-star"></span> (3 Avaliações)
-                    </div>
                 </div>
             </div>
         </header>
@@ -62,21 +59,31 @@
             <div>
                 <table class="table">
                     <tbody>
-                        @foreach($course->classrooms as $classroom)
+                        @foreach($course->openClassrooms as $classroom)
                             <tr>
                                 <td style="vertical-align: middle;">
                                     {{ $classroom->description }}
                                 </td>
                                 <td class="text-right" style="width: 100px; vertical-align: middle;">
-                                    {{ $classroom->registrations->count() }}/{{ $classroom->max_students }} <i class="fa fa-users"></i>
+                                    {{ $classroom->students_count }}/{{ $classroom->max_students }} <i class="fa fa-users"></i>
                                 </td>
                                 <td class="text-right" style="width: 220px; vertical-align: middle;">
-                                    01/01/2018 - 10/12/2018 <i class="fa fa-calendar"></i>
+                                    {{ $classroom->start_date->format('d/m/Y') }} - {{ $classroom->end_date->format('d/m/Y') }} <i class="fa fa-calendar"></i>
                                 </td>
                                 <td style="vertical-align: middle; width: 60px">
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        Matricular-se
-                                    </a>
+                                    @if(!$classroom->myRegistrations->last())
+                                        <form method="POST" action="{{ route('site.classroom-register') }}">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id" value="{{ $classroom->id }}">
+                                            <button class="btn btn-sm btn-primary">
+                                                Matricular-se
+                                            </button>
+                                        </form>
+                                    @elseif(!$classroom->myRegistrations->last()->pivot->approved)
+                                        Esperando aprovação
+                                    @else
+                                        <a href="{{ route('forum.home', ['id' => $classroom->id]) }}" class="btn btn-primary">Acessar</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

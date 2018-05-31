@@ -30,7 +30,7 @@
                 <ul>
                     <li><a href="{{ route('forum.home', ['id' => $classroom->id]) }}">Início</a></li>
                     <li><a href="{{ route('forum.calendar', ['id' => $classroom->id]) }}">Calendário</a></li>
-                    <li><a href="#">Turma</a></li>
+                    <li><a href="{{ route('forum.students', ['id' => $classroom->id]) }}">Turma</a></li>
                 </ul>
             </nav>
             <div class="forum__nav__label">Fórum</div>
@@ -46,7 +46,7 @@
             <div class="forum__nav__label">Pedagógico</div>
             <nav>
                 <ul>
-                    <li><a href="#">Aprovar Matriculas</a></li>
+                    <li><a href="{{ route('forum.registrations', ['id' => $classroom->id]) }}">Aprovar Matriculas</a></li>
                     <li><a href="{{ route('forum.new-chapter', ['id' => $classroom->id ]) }}">Postar Material</a></li>
                     <li><a href="#">Lançar Notas</a></li>
                 </ul>

@@ -10,6 +10,9 @@ class Classroom extends Model
     protected $fillable = [
         'start_date', 'end_date', 'hidden', 'max_students', 'description', 'welcome_text'
     ];
+    protected $dates = [
+        'start_date', 'end_date'
+    ];
 
     public function loadDefault()
     {
@@ -52,7 +55,17 @@ class Classroom extends Model
 
     public function registrations()
     {
-        return $this->belongsToMany(User::class, "luno_user_classroom");
+        return $this->belongsToMany(User::class, "luno_user_classroom")->withPivot('approved', 'role')->withTimestamps();
+    }
+
+    public function students()
+    {
+        return $this->registrations()->wherePivot('approved', 1)->wherePivot('role', 'student');
+    }
+
+    public function myRegistrations()
+    {
+        return $this->registrations()->whereId(\Auth::id());
     }
 
     public function calendar()

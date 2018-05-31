@@ -7,7 +7,7 @@ use luno;
 -- users(id, user_name, birthdate, email, user_password, avatar_id)
 
 create table luno_users(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     user_name varchar(128) not null,
     birthdate date not null,
     email varchar(128) not null,
@@ -20,7 +20,7 @@ create table luno_users(
 -- institutions(id, institution_name, description)
 
 create table luno_institutions(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     institution_name varchar(128) not null,
     description text,
     created_at timestamp default current_timestamp,
@@ -30,7 +30,7 @@ create table luno_institutions(
 -- courses(id, course_name, institution_id, creator_id)
 
 create table luno_courses(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     course_name varchar(128) not null,
     institution_id int,
     creator_id int not null,
@@ -41,7 +41,7 @@ create table luno_courses(
 -- classrooms(id, start_date, end_date, hidden, invite_only, course_id, creator_id)
 
 create table luno_classrooms(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     start_date date not null,
     end_date date not null,
     hidden boolean default false,
@@ -55,7 +55,7 @@ create table luno_classrooms(
 -- topics(id, title, creator_id, section_id)
 
 create table luno_topics(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     title varchar(128) not null,
     creator_id int not null,
     section_id int not null,
@@ -66,7 +66,7 @@ create table luno_topics(
 -- posts(id, content, creator_id, topic_id)
 
 create table luno_posts(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     content text not null,
     creator_id int not null,
     created_at timestamp default current_timestamp,
@@ -76,7 +76,7 @@ create table luno_posts(
 -- sections(id, title, subtitle, classroom_id, creator_id)
 
 create table luno_sections(
-	id int primary key,
+    id int primary key,
     title varchar(124) not null,
     subtitle varchar(124) not null,
     classroom_id int not null,
@@ -88,7 +88,7 @@ create table luno_sections(
 -- calendar(id, content, event_date, classroom_id, creator_id)
 
 create table luno_calendar(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     content text not null,
     event_date date not null,
     classroom_id int not null,
@@ -100,7 +100,7 @@ create table luno_calendar(
 -- notices(id, content, type, seen, target_id)
 
 create table luno_notices(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     content text not null,
     notice_type varchar(64) not null,
     seen bool default false,
@@ -112,7 +112,7 @@ create table luno_notices(
 -- tasks(id, title, description, deadline, weight, creator_id, classroom_id)
 
 create table luno_tasks(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     title varchar(128) not null,
     description text not null,
     deadline date,
@@ -126,7 +126,7 @@ create table luno_tasks(
 -- chapter(id, title, content, creator_id, clasroom_id)
 
 create table luno_chapter(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     title varchar(64) not null,
     content text not null,
     creator_id int not null,
@@ -138,7 +138,7 @@ create table luno_chapter(
 -- attachment(id, post_id, media_id)
 
 create table luno_attachment(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     post_id int not null,
     media_id int not null,
     created_at timestamp default current_timestamp,
@@ -148,7 +148,7 @@ create table luno_attachment(
 -- registrations(id, user_id, classroom_id)
 
 create table luno_registrations(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     user_id int not null,
     classroom_id int not null,
     created_at timestamp default current_timestamp,
@@ -158,7 +158,7 @@ create table luno_registrations(
 -- grades(id, val, user_id, task_id, avaliator_id, media_id)
 
 create table luno_grades(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     val double,
     user_id int not null,
     task_id int not null,
@@ -171,7 +171,7 @@ create table luno_grades(
 -- media(id, title, media_type, mime, location, size, owner_id, classroom_id)
 
 create table luno_media(
-	id int primary key auto_increment,
+    id int primary key auto_increment,
     title varchar(64),
     media_type varchar(32) not null,
     mime varchar(128) not null,
@@ -202,7 +202,7 @@ alter table luno_registrations add column role varchar(32);
 drop table luno_registrations;
 
 create table luno_user_classroom(
-	user_id int,
+    user_id int,
     classroom_id int,
     role varchar(32),
     created_at timestamp default current_timestamp,
@@ -210,7 +210,7 @@ create table luno_user_classroom(
 );
 
 create table luno_user_institution(
-	user_id int,
+    user_id int,
     instituion_id int,
     role varchar(32),
     created_at timestamp default current_timestamp,
@@ -218,7 +218,7 @@ create table luno_user_institution(
 );
 
 create table luno_user_course(
-	user_id int,
+    user_id int,
     course_id int,
     role varchar(32),
     created_at timestamp default current_timestamp,
@@ -261,3 +261,13 @@ from luno_courses c
 left join luno_user_course uc1 on c.id = uc1.course_id
 left join luno_user_course uc2 on c.id = uc2.course_id and uc2.created_at < (NOW() - interval 1 month)
 group by c.id;
+
+-- ####################################################################################################
+-- # Atualizações: 31/05/2018
+-- ####################################################################################################
+
+alter table luno_user_classroom add column approved boolean default false;
+alter table luno_user_classroom change column role role varchar(32) default 'student';
+
+
+

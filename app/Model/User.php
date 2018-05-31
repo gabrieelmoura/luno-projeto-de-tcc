@@ -27,6 +27,6 @@ class User extends Authenticatable
 
     public function registrations()
     {
-        return $this->belongsToMany(Classroom::class, "luno_user_classroom");
+        return $this->belongsToMany(Classroom::class, "luno_user_classroom")->withTimestamps()->withPivot('approved', 'role');
     }
 }
