@@ -8,7 +8,7 @@ class Grade extends Model
 {
     protected $table = "luno_grades";
     protected $fillable = [
-        'val', 'msg'
+        'msg'
     ];
     protected $dates = [
         'created_at'

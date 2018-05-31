@@ -175,4 +175,34 @@ class ForumController extends Controller {
         return view('forum.students', ['classroom' => $this->classroom]);
     }
 
+    public function grades()
+    {
+        $this->classroom->loadDefault();
+        $this->classroom->load(['tasks' => function ($query) {
+            $query->withCount(['grades as pending_count' => function ($query) {
+                $query->whereNull('avaliator_id');
+            }]);
+        }]);
+        return view('forum.grades', ['classroom' => $this->classroom]);
+    }
+
+    public function taskGrades($tid)
+    {
+        $this->classroom->loadDefault();
+        $classroom = $this->classroom;
+        $task = \App\Model\Task::find($tid);
+        $naoAvaliados = $task->grades()->with('user')->whereNull('avaliator_id')->get();
+        $avaliados = $task->grades()->with('user')->whereNotNull('avaliator_id')->get();
+        return view('forum.taskGrades', compact('classroom', 'task', 'naoAvaliados', 'avaliados'));
+    }
+
+    public function taskGradesAction($id, $tid)
+    {
+        $grade = Grade::find(request('grade_id'));
+        $grade->val = request('val');
+        $grade->avaliator_id = \Auth::id();
+        $grade->save();
+        return redirect()->back();
+    }
+
 }

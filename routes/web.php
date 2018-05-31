@@ -12,10 +12,13 @@
 */
 
 Route::get('/', 'SiteController@home')->name('site.home');
+
 Route::get('/course/{id}', 'SiteController@course')->name('site.course');
+
 Route::get('/login', 'SiteController@loginPage')->name('site.login');
 
 Route::post('/auth', 'LoginController@auth')->name('login.auth');
+
 Route::post('/register', 'LoginController@register')->name('login.register');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -50,15 +53,24 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/novo-capitulo', 'ForumController@newChapter')->name('forum.new-chapter');
         Route::post('/novo-capitulo', 'ForumController@newChapterAction')->name('forum.new-chapter-action');
 
-        Route::get('/', 'ForumController@home')->name('forum.home');
-        Route::get('/tarefa/{tid}', 'ForumController@task')->name('forum.task');
-        Route::get('/sessao/{sid}', 'ForumController@section')->name('forum.section');
-        Route::get('/topic/{tid}', 'ForumController@topic')->name('forum.topic');
-        Route::get('/material/{cid}', 'ForumController@chapter')->name('forum.chapter');
-
         Route::get('/registrations', 'ForumController@registrations')->name('forum.registrations');
         Route::post('/registrations', 'ForumController@registrationsAction')->name('forum.registrations-action');
 
+        Route::get('/lancar-notas/{tid}', 'ForumController@taskGrades')->name('forum.taskGrades');
+        Route::post('/lancar-notas/{tid}', 'ForumController@taskGradesAction')->name('forum.taskGradesAction');
+
+        Route::get('/', 'ForumController@home')->name('forum.home');
+        
+        Route::get('/tarefa/{tid}', 'ForumController@task')->name('forum.task');
+        
+        Route::get('/sessao/{sid}', 'ForumController@section')->name('forum.section');
+        
+        Route::get('/topic/{tid}', 'ForumController@topic')->name('forum.topic');
+
+        Route::get('/material/{cid}', 'ForumController@chapter')->name('forum.chapter');
+
         Route::get('/turma', 'ForumController@students')->name('forum.students');
+
+        Route::get('/lancar-notas', 'ForumController@grades')->name('forum.grades');
     });
 });

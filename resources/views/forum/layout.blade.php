@@ -48,7 +48,7 @@
                 <ul>
                     <li><a href="{{ route('forum.registrations', ['id' => $classroom->id]) }}">Aprovar Matriculas</a></li>
                     <li><a href="{{ route('forum.new-chapter', ['id' => $classroom->id ]) }}">Postar Material</a></li>
-                    <li><a href="#">Lançar Notas</a></li>
+                    <li><a href="{{ route('forum.grades', ['id' => $classroom->id ]) }}">Lançar Notas</a></li>
                 </ul>
             </nav>
             <div class="forum__nav__label">Material</div>
