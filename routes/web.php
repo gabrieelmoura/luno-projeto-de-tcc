@@ -13,13 +13,15 @@
 
 Route::get('/', 'SiteController@home')->name('site.home');
 Route::get('/course/{id}', 'SiteController@course')->name('site.course');
-Route::get('/login', 'SiteController@loginPage')->name('login');
-Route::get('/profile', 'SiteController@profile')->name('site.profile');
+Route::get('/login', 'SiteController@loginPage')->name('site.login');
 
 Route::post('/auth', 'LoginController@auth')->name('login.auth');
-Route::get('/logout', 'LoginController@logout')->name('login.logout');
+Route::post('/register', 'LoginController@register')->name('login.register');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profile', 'SiteController@profile')->name('site.profile');
+    Route::get('/logout', 'LoginController@logout')->name('login.logout');
+    
     Route::get('/editar-perfil', 'SiteController@editProfile')->name('site.edit-profile');
     Route::post('/editar-perfil', 'SiteController@editProfileAction')->name('site.edit-profile-action');
 
@@ -29,16 +31,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/nova-turma/{id}', 'SiteController@newClassroom')->name('site.new-classroom');
     Route::post('/nova-turma/{id}', 'SiteController@newClassroomAction')->name('site.new-classroom-action');;
 
-    Route::get('/forum/{id}/editar-quadro', 'ForumController@editWelcomeText')->name('forum.edit-welcome-text');
-    Route::post('/forum/{id}/editar-quadro', 'ForumController@editWelcomeTextAction')->name('forum.edit-welcome-text-action');
+    Route::group(['prefix' => 'forum/{id}'], function () {
+        Route::get('/editar-quadro', 'ForumController@editWelcomeText')->name('forum.edit-welcome-text');
+        Route::post('/editar-quadro', 'ForumController@editWelcomeTextAction')->name('forum.edit-welcome-text-action');
 
-    Route::get('/forum/{id}/nova-tarefa', 'ForumController@newTask')->name('forum.new-task');
-    Route::post('/forum/{id}/nova-tarefa', 'ForumController@newTaskAction')->name('forum.new-task-action');
+        Route::get('/nova-tarefa', 'ForumController@newTask')->name('forum.new-task');
+        Route::post('/nova-tarefa', 'ForumController@newTaskAction')->name('forum.new-task-action');
+        Route::post('/entregar-tarefa', 'ForumController@taskSubmit')->name('forum.task-submit');
 
-    Route::get('/forum/{id}/nova-sessao', 'ForumController@newSection')->name('forum.new-section');
-    Route::post('/forum/{id}/nova-sessao', 'ForumController@newSectionAction')->name('forum.new-section-action');
+        Route::get('/nova-sessao', 'ForumController@newSection')->name('forum.new-section');
+        Route::post('/nova-sessao', 'ForumController@newSectionAction')->name('forum.new-section-action');
 
-    Route::get('/forum/{id}', 'ForumController@home')->name('forum.home');
-    Route::get('/section/{id}', 'ForumController@section')->name('forum.section');
-    Route::get('/topic/{id}', 'ForumController@topic')->name('forum.topic');
+        Route::get('/calendar', 'ForumController@calendar')->name('forum.calendar');
+        Route::post('/calendar', 'ForumController@calendarAction')->name('forum.calendar-action');
+
+        Route::get('/novo-capitulo', 'ForumController@newChapter')->name('forum.new-chapter');
+        Route::post('/novo-capitulo', 'ForumController@newChapterAction')->name('forum.new-chapter-action');
+
+        Route::get('/', 'ForumController@home')->name('forum.home');
+        Route::get('/tarefa/{tid}', 'ForumController@task')->name('forum.task');
+        Route::get('/sessao/{sid}', 'ForumController@section')->name('forum.section');
+        Route::get('/topic/{tid}', 'ForumController@topic')->name('forum.topic');
+        Route::get('/material/{cid}', 'ForumController@chapter')->name('forum.chapter');
+    });
 });

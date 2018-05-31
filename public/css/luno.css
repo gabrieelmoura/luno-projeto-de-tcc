@@ -310,6 +310,10 @@
   font-weight: bolder;
 }
 
+.forum__nav__off-link {
+  padding: 2px 10px;
+}
+
 .forum__post {
   padding: 10px 0;
 }
@@ -320,21 +324,6 @@
 
 .forum__post--response .forum__post__user-photo {
   max-height: 150px;
-}
-
-.forum__post pre {
-  font-size: 16px;
-  font-family: inherit;
-  white-space: pre-wrap;
-  /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap;
-  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;
-  /* Opera 4-6 */
-  white-space: -o-pre-wrap;
-  /* Opera 7 */
-  word-wrap: break-word;
-  /* Internet Explorer 5.5+ */
 }
 
 .forum__post__header {
@@ -431,6 +420,23 @@
   padding: 60px 40px;
 }
 
+pre {
+  font-size: inherit;
+  font-family: inherit;
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   color: black;
@@ -464,5 +470,9 @@ body {
 
 a {
   color: #007bff;
+}
+
+.table td {
+  vertical-align: middle;
 }
 

@@ -246,3 +246,18 @@ rename table luno_chapter to luno_chapters;
 -- ####################################################################################################
 
 alter table luno_sections change column id id int auto_increment;
+
+-- ####################################################################################################
+-- # Atualizações: 30/05/2018
+-- ####################################################################################################
+
+alter table luno_tasks add column delivery_form varchar(12);
+alter table luno_grades add column msg text;
+alter table luno_users change column birthdate birthdate date null;
+
+create or replace view luno_view_featured_courses_index as
+select c.id as course_id, count(uc1.course_id) qtd_all, count(uc2.course_id) qtd_recent
+from luno_courses c
+left join luno_user_course uc1 on c.id = uc1.course_id
+left join luno_user_course uc2 on c.id = uc2.course_id and uc2.created_at < (NOW() - interval 1 month)
+group by c.id;

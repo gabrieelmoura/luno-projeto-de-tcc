@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Model\User;
 
 class LoginController
 {
@@ -22,6 +23,16 @@ class LoginController
     public function logout()
     {
         Auth::logout();
+        return redirect('/');
+    }
+
+    public function register()
+    {
+        $user = new User(request()->all());
+        $user->email = request('email');
+        $user->user_password = bcrypt(request('password'));
+        $user->save();
+        Auth::loginUsingId($user->id);
         return redirect('/');
     }
 }

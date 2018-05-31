@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Chapter extends Model
 {
     protected $table = "luno_chapters";
+    protected $fillable = [
+        'title', 'content'
+    ];
 
     public function classroom()
     {

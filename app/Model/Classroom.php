@@ -11,6 +11,15 @@ class Classroom extends Model
         'start_date', 'end_date', 'hidden', 'max_students', 'description', 'welcome_text'
     ];
 
+    public function loadDefault()
+    {
+        return $this->load([
+            'course', 'chapters'
+        ])->load(['sections' => function ($query) {
+            $query->withCount('topics');
+        }]);
+    }
+
     public function course()
     {
         return $this->belongsTo(Course::class, "course_id", "id");
@@ -44,5 +53,10 @@ class Classroom extends Model
     public function registrations()
     {
         return $this->belongsToMany(User::class, "luno_user_classroom");
+    }
+
+    public function calendar()
+    {
+        return $this->hasMany(Calendar::class, "classroom_id");
     }
 }

@@ -18,8 +18,8 @@
             </form>
             <nav id="topbar__nav">
                 <ul>
-                    <li><a href="#">Voltar para o Site</a></li>
-                    <li><a href="#">Perfil</a></li>
+                    <li><a href="{{ route('site.home') }}">Voltar para o Site</a></li>
+                    <li><a href="{{ route('site.home') }}">Perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,42 +28,37 @@
         <div id="forum__nav">
             <nav>
                 <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Calendário</a></li>
-                    <li><a href="#">Notas</a></li>
+                    <li><a href="{{ route('forum.home', ['id' => $classroom->id]) }}">Início</a></li>
+                    <li><a href="{{ route('forum.calendar', ['id' => $classroom->id]) }}">Calendário</a></li>
                     <li><a href="#">Turma</a></li>
                 </ul>
             </nav>
             <div class="forum__nav__label">Fórum</div>
             <nav>
                 <ul>
-                    <li><a href="#">Apresentação</a></li>
-                    <li><a href="#">Dúvidas</a></li>
-                    <li><a href="#">Primeiro Trabalho</a></li>
+                    @forelse($classroom->sections as $section)
+                        <li><a href="{{ route('forum.section', ['id' => $classroom->id, 'sid' => $section->id]) }}">{{ $section->title }}</a></li>
+                    @empty
+                        <li class="forum__nav__off-link">Não há sessões</li>
+                    @endforelse
                 </ul>
             </nav>
             <div class="forum__nav__label">Pedagógico</div>
             <nav>
                 <ul>
                     <li><a href="#">Aprovar Matriculas</a></li>
-                    <li><a href="#">Postar Material</a></li>
+                    <li><a href="{{ route('forum.new-chapter', ['id' => $classroom->id ]) }}">Postar Material</a></li>
                     <li><a href="#">Lançar Notas</a></li>
                 </ul>
             </nav>
             <div class="forum__nav__label">Material</div>
             <nav>
                 <ul>
-                    <li><a href="#">Capitulo 1</a></li>
-                    <li><a href="#">Capitulo 2</a></li>
-                    <li><a href="#">Capitulo 3</a></li>
-                    <li><a href="#">Capitulo 4</a></li>
-                    <li><a href="#">Capitulo 5</a></li>
-                    <li><a href="#">Capitulo 6</a></li>
-                    <li><a href="#">Capitulo 7</a></li>
-                    <li><a href="#">Capitulo 8</a></li>
-                    <li><a href="#">Capitulo 9</a></li>
-                    <li><a href="#">Capitulo 10</a></li>
-                    <li><a href="#">Capitulo 11</a></li>
+                    @forelse($classroom->chapters as $chapter)
+                        <li><a href="{{ route('forum.chapter', ['id' => $classroom->id, 'cid' => $chapter->id ]) }}">{{ $chapter->title }}</a></li>
+                    @empty
+                        <li class="forum__nav__off-link">Não há material</li>
+                    @endforelse
                 </ul>
             </nav>
         </div>

@@ -31,22 +31,23 @@
             </div>
             <div class="col-md-6" id="loginpanel__register">
                 <h2 class="text-center">Cadastre-se!</h2>
-                <form action="">
+                <form method="POST" action="{{ route('login.register') }}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="">Nome</label>
+                        <input type="text" class="form-control" placeholder="Nome" name="user_name">
+                    </div>
                     <div class="form-group">
                         <label for="">E-mail</label>
-                        <input type="text" class="form-control" placeholder="E-mail">
+                        <input type="text" class="form-control" placeholder="E-mail" name="email">
                     </div>
                     <div class="form-group">
                         <label for="">Senha</label>
-                        <input type="text" class="form-control" placeholder="Senha">
+                        <input type="password" class="form-control" placeholder="Senha" name="user_password">
                     </div>
                     <div class="form-group">
                         <label for="">Confirmação de Senha</label>
-                        <input type="text" class="form-control" placeholder="Confirmação de Senha">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Data de Nascimento</label>
-                        <input type="text" class="form-control" placeholder="Data de Nascimento">
+                        <input type="password" class="form-control" placeholder="Confirmação de Senha">
                     </div>
                     <div class="form-group text-center">
                         <button class="btn btn-primary">Cadastre-se</button>

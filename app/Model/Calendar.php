@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Calendar extends Model
 {
     protected $table = "luno_calendar";
+    protected $fillable = [
+    	'event_date', 'content'
+    ];
+    protected $dates = [
+    	'event_date'
+    ];
 
     public function classroom()
     {

@@ -24,25 +24,35 @@
             <tbody>
                 @forelse($classroom->tasks as $task)
                     <tr>
-                        <td>
+                        <td style="padding-left: 0; width: 99%">
                             {{ $task->title }}
                         </td>
-                        <td class="text-right">
+                        <td style="white-space: nowrap;">
+                            @if($task->myGrade)
+                                {{ $task->myGrade->val }}
+                            @else
+                                --
+                            @endif
+                        </td>
+                        <td style="white-space: nowrap;">
+                            Peso {{ $task->weight }}
+                        </td>
+                        <td style="white-space: nowrap;">
                             Até {{ $task->deadline->format('d/m/Y') }}
                         </td>
-                        <td class="text-right">
-                            <a href="#" class="btn btn-sm btn-primary">Ver Tarefa</a>
+                        <td style="padding-right: 0; white-space: nowrap;">
+                            <a href="{{ route('forum.task', ['id' => $classroom->id, 'tid' => $task->id]) }}" class="btn btn-sm btn-primary">Ver Tarefa</a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">
+                        <td colspan="5" style="padding-left: 0; padding-right: 0">
                             Nenhuma Tarefa
                         </td>
                     </tr>
                 @endforelse
                 <tr>
-                    <td colspan="3">
+                    <td colspan="5" style="padding-left: 0; padding-right: 0">
                         <a href="{{ route('forum.new-task', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
                             <i class="fa fa-plus"></i> Criar Nova Tarefa
                         </a>
@@ -55,25 +65,25 @@
             <tbody>
                 @forelse($classroom->sections as $section)
                     <tr>
-                        <td>
-                            <a href="{{ route('forum.section', ['id' => $section->id]) }}">
+                        <td style="padding-left: 0;">
+                            <a href="{{ route('forum.section', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                                 <h4>{{ $section->title }}</h4>
                             </a>
                             {{ $section->subtitle }}
                         </td>
-                        <td class="text-right" style="vertical-align: middle">
-                            {{ $section->topics_count }} posts
+                        <td class="text-right" style="padding-right: 0">
+                            {{ $section->topics_count }} tópicos
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" style="padding-left: 0; padding-right: 0">
                             Este forum ainda não possui nenhuma sessão
                         </td>
                     </tr>
                 @endforelse
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2" style="padding-left: 0; padding-right: 0">
                         <a href="{{ route('forum.new-section', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
                             <i class="fa fa-plus"></i> Criar Nova Sessão
                         </a>

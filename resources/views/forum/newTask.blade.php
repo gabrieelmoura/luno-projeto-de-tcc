@@ -34,6 +34,17 @@
                     A média final do aluno na turma é ponderada usando o peso de cada tarefa.
                 </small>
             </div>
+            <div class="form-group">
+                <label class="control-label">Forma de Entrega</label>
+                <div class="form-check">
+                    <input type="checkbox" name="delivery_form_arr[]" value="M" id="delivery_form_arr_m"> 
+                    <label for="delivery_form_arr_m">Mensagem</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" name="delivery_form_arr[]" value="F" id="delivery_form_arr_f">
+                    <label for="delivery_form_arr_f">Upload de Arquivo</label>
+                </div>
+            </div>
             <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit" name="button">
                     Criar Tarefa!

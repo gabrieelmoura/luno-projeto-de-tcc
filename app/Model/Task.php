@@ -28,4 +28,9 @@ class Task extends Model
     {
         return $this->hasMany(Grade::class, "task_id", "id");
     }
+
+    public function myGrade()
+    {
+        return $this->hasOne(Grade::class, "task_id", "id")->whereUserId(\Auth::id());   
+    }
 }

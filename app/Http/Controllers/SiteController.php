@@ -11,7 +11,15 @@ use App\Model\User;
 class SiteController extends Controller {
 
     public function home() {
-        return view('site.home');
+        $courses = Course::join('luno_view_featured_courses_index as fci', 'fci.course_id', '=', 'luno_courses.id')
+            ->orderBy('fci.qtd_recent', 'DESC')
+            ->orderBy('fci.qtd_all', 'DESC')
+            ->select('luno_courses.*')
+            ->with(['image', 'creator'])
+            ->withCount('openClassrooms')
+            ->take(5)
+            ->get();
+        return view('site.home', ['courses' => $courses]);
     }
 
     public function course($id) {

@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
     protected $table = "luno_grades";
+    protected $fillable = [
+        'val', 'msg'
+    ];
+    protected $dates = [
+        'created_at'
+    ];
 
     public function user()
     {

@@ -19,21 +19,19 @@
         </ul>
     </section>
     <section id="classrooms" class="clearfix">
-        <h1>Turmas em Destaque</h1>
+        <h1>Cursos em Destaque</h1>
         <div class="classroom-list">
-            @for($i = 0; $i < 10; $i++)
+            @foreach($courses as $course)
                 <div class="classroom-box">
-                    <img class="classroom-box__featured-img" src="https://www.alertasecurity.com.br/images/Entenda-o-que--Segurana-da-Informao-e-reduza-riscos-na-empresa.png">
-                    <h2 class="classroom-box__title">Segurança da Informação</h2>
-                    <span class="classroom-box__info">Oferecido por <a href="#">Unigranrio</a></span>
-                    <span class="classroom-box__info">Professor <a href="#">Gabriel Moura</a></span>
-                    <span class="classroom-box__info">01/01/2018 - 31/06/2018 (6 meses)</span>
-                    <span class="classroom-box__info">10/55 <i class="fa fa-users"></i></span>
+                    <img class="classroom-box__featured-img" src="{{ $course->image->location }}">
+                    <h2 class="classroom-box__title">{{ $course->course_name }}</h2>
+                    <span class="classroom-box__info">Professor <a href="#">{{ $course->creator->user_name }}</a></span>
+                    <span class="classroom-box__info">{{ $course->open_classrooms_count }} turmas abertas</span>
                     <div class="classroom-box__actions">
-                        <a class="btn btn-primary btn-sm" href="#">Matricular-se</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('site.course', ['id' => $course->id]) }}">Ver Mais</a>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </section>
 @endsection
