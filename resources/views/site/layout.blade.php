@@ -33,7 +33,7 @@
                                 <span class="fa fa-users"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowns__turmas">
-                                <a class="dropdown-item" href="#">Muitas! Muitas turmas que eu tenho!</a>
+                                <a class="dropdown-item" href="#">Turmas</a>
                             </div>
                         </li>
                         <li>
