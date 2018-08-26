@@ -24,16 +24,25 @@
                         <li><a href="/login">Entrar / Cadastrar</a></li>
                     @else
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown">
+                            <a href="#" data-toggle="dropdown" id="dropdowns__notificacoes">
                                 <span class="fa fa-bell"></span>
                             </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowns__notificacoes">
+                                <a class="dropdown-item" href="#">Você não tem nenhuma notificação</a>
+                            </div>
                         </li>
                         <li class="dropdown">
                             <a href="#" id="dropdowns__turmas" data-toggle="dropdown">
                                 <span class="fa fa-users"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowns__turmas">
-                                <a class="dropdown-item" href="#">Turmas</a>
+                                @forelse(Auth::user()->approvedRegistrations as $registration)
+                                    <a class="dropdown-item" href="{{ route('forum.home', ['id' => $registration->id]) }}">
+                                        {{ $registration->description }}
+                                    </a>
+                                @empty
+                                    <a class="dropdown-item" href="#">Você não faz parte de nenhuma turma</a>
+                                @endforelse
                             </div>
                         </li>
                         <li>

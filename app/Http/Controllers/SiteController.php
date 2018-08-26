@@ -8,7 +8,8 @@ use App\Model\Course;
 use App\Model\Classroom;
 use App\Model\User;
 
-class SiteController extends Controller {
+class SiteController extends Controller 
+{
 
     public function home() {
         $courses = Course::join('luno_view_featured_courses_index as fci', 'fci.course_id', '=', 'luno_courses.id')

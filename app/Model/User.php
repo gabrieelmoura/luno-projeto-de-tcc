@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Classroom::class, "luno_user_classroom")->withTimestamps()->withPivot('approved', 'role');
     }
+
+    public function approvedRegistrations()
+    {
+        return $this->registrations()->wherePivot('approved', true);
+    }
 }
