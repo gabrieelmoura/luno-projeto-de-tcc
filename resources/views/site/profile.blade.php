@@ -40,7 +40,7 @@
                             Nascimento
                         </th>
                         <td>
-                            {{ $user->birthdate->format('d/m/Y') }}
+                            {{ $user->birthdate_formated_br }}
                         </td>
                     </tr>
                     <tr>

@@ -15,6 +15,16 @@ class User extends Authenticatable
         'birthdate'
     ];
 
+    public function getBirthdateFormatedAttribute()
+    {
+        return $this->birthdate ? $this->birthdate->format('Y-m-d') : '--';
+    }
+
+    public function getBirthdateFormatedBrAttribute()
+    {
+        return $this->birthdate ? $this->birthdate->format('d/m/Y') : '--';
+    }
+
     public function getAuthPassword()
     {
         return $this->user_password;
