@@ -9,6 +9,8 @@ use \App\Model\Calendar;
 use \App\Model\Grade;
 use \App\Model\Media;
 use \App\Model\Chapter;
+use \App\Model\Topic;
+use \App\Model\Post;
 
 class ForumController extends Controller {
 
@@ -17,7 +19,6 @@ class ForumController extends Controller {
     public function __construct()
     {
         $this->classroom = Classroom::find(request()->route('id'));
-        
     }
 
     public function home($id)
@@ -81,7 +82,10 @@ class ForumController extends Controller {
 
     public function topic()
     {
-        return view('forum.topic');
+        $this->classroom->loadDefault();
+        return view('forum.topic', [
+            'classroom' => $this->classroom
+        ]);
     }
 
     public function calendar()
@@ -203,6 +207,33 @@ class ForumController extends Controller {
         $grade->avaliator_id = \Auth::id();
         $grade->save();
         return redirect()->back();
+    }
+
+    public function newPost($id, $sid)
+    {
+        $classroom = $this->classroom->loadDefault();
+        $section = Section::findOrFail($sid);
+        return view('forum.newPost', compact('classroom', 'section'));
+    }
+
+    public function newPostAction()
+    {
+        if (!request('topic_id')) {
+            $topic = new Topic();
+            $topic->title = request('topic_title');
+            $topic->creator_id = \Auth::id();
+            $topic->section_id = request('section_id');
+            $topic->save();
+            $topic_id = $topic->id;
+        } else {
+            $topic_id = request('topic_id');
+        }
+        $post = new Post();
+        $post->content = request('content');
+        $post->creator_id = \Auth::id();
+        $post->topic_id = $topic_id;
+        $post->save();
+        return redirect(route('forum.topic', ['id' => $this->classroom->id, 'tid' => $topic_id]));
     }
 
 }

@@ -59,13 +59,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/lancar-notas/{tid}', 'ForumController@taskGrades')->name('forum.taskGrades');
         Route::post('/lancar-notas/{tid}', 'ForumController@taskGradesAction')->name('forum.taskGradesAction');
 
+        Route::get('/novo-post/{sid}', 'ForumController@newPost')->name('forum.newPost');
+        Route::post('/novo-post/{sid}', 'ForumController@newPostAction')->name('forum.newPostAction');
+
         Route::get('/', 'ForumController@home')->name('forum.home');
         
         Route::get('/tarefa/{tid}', 'ForumController@task')->name('forum.task');
         
         Route::get('/sessao/{sid}', 'ForumController@section')->name('forum.section');
         
-        Route::get('/topic/{tid}', 'ForumController@topic')->name('forum.topic');
+        Route::get('/topico/{tid}', 'ForumController@topic')->name('forum.topic');
 
         Route::get('/material/{cid}', 'ForumController@chapter')->name('forum.chapter');
 

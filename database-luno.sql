@@ -269,5 +269,8 @@ group by c.id;
 alter table luno_user_classroom add column approved boolean default false;
 alter table luno_user_classroom change column role role varchar(32) default 'student';
 
+-- ####################################################################################################
+-- # Atualizações: 26/08/2018
+-- ####################################################################################################
 
-
+alter table luno_posts add column topic_id int after content;

@@ -9,9 +9,9 @@
         </h3>
 
         <div class="form-group">
-            <button class="btn btn-primary btn-sm" style="margin-top: -5px">
+            <a class="btn btn-primary btn-sm" style="margin-top: -5px" href="{{ route('forum.newPost', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                 <i class="fa fa-plus"></i> Criar Tópico
-            </button>
+            </a>
             <button class="btn btn-primary btn-sm" style="margin-top: -5px">
                 <i class="fa fa-filter"></i> Filtros
             </button>
