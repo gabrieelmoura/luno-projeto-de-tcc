@@ -44,4 +44,14 @@ class User extends Authenticatable
     {
         return $this->registrations()->wherePivot('approved', true);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'creator_id');
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class, 'creator_id');
+    }
 }

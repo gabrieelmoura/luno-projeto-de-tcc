@@ -22,4 +22,9 @@ class Topic extends Model
     {
         return $this->hasMany(Post::class, "topic_id", "id");
     }
+
+    public function lastPost()
+    {
+        return $this->hasOne(Post::class, "topic_id", "id")->orderBy("id", "DESC");
+    }
 }

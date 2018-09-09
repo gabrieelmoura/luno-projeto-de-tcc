@@ -9,16 +9,16 @@
         </h3>
 
         <div class="form-group">
-            <a class="btn btn-primary btn-sm" style="margin-top: -5px" href="{{ route('forum.newPost', ['id' => $classroom->id, 'sid' => $section->id]) }}">
+            <a class="btn btn-primary btn-sm" style="margin-top: -5px" href="{{ route('forum.newTopic', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                 <i class="fa fa-plus"></i> Criar Tópico
             </a>
-            <button class="btn btn-primary btn-sm" style="margin-top: -5px">
+            <!-- <button class="btn btn-primary btn-sm" style="margin-top: -5px">
                 <i class="fa fa-filter"></i> Filtros
-            </button>
+            </button> -->
         </div>
 
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Sistemas de Informação</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('forum.home', ['id' => $classroom->id]) }}">{{ $classroom->description }}</a></li>
             <li class="breadcrumb-item active">{{ $section->title }}</li>
         </ol>
 
@@ -26,32 +26,28 @@
             <thead>
                 <tr>
                     <th>Título</th>
-                    <th>Respostas</th>
-                    <th>Visto</th>
-                    <th>Autor</th>
-                    <th>Ultima Mensagem</th>
+                    <th style="text-align: center;">Respostas</th>
+                    <th style="text-align: center;">Autor</th>
+                    <th style="text-align: right;">Ultima Mensagem</th>
                 </tr>
             </thead>
             <tbody>
-                @for($i=0; $i<20; $i++)
+                @foreach($section->topics as $topic)
                     <tr>
                         <td>
-                            <a href="#">Como prevenir SQL Injection na minha aplicação web?</a>
+                            <a href="{{ route('forum.topic', ['id' => $classroom->id, 'sid' => $section->id, 'tid' => $topic->id]) }}">{{ $topic->title }}</a>
                         </td>
-                        <td>
-                            10
+                        <td style="text-align: center;">
+                            {{ $topic->posts_count }}
                         </td>
-                        <td>
-                            Roberto
+                        <td style="text-align: center;">
+                            <a href="#">{{ $topic->creator->user_name }}</a>
                         </td>
-                        <td>
-                            45
-                        </td>
-                        <td>
-                            1h atrás por José
+                        <td style="text-align: right;">
+                            {{ $topic->lastPost->created_at->diffForHumans() }} por {{ $topic->lastPost->creator->user_name }}
                         </td>
                     </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
     </div>

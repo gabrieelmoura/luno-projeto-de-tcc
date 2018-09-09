@@ -31,7 +31,7 @@ class Media extends Model
         $media = new Media;
         $media->mime = $file->getMimeType();
         $media->size = $file->getClientSize();
-        $media->location = env('MEDIA_PREFIX') . '/' . $file->store($type);
+        $media->location = \Storage::url($file->store($type));
         $media->media_type = $type;
         return $media;
     }

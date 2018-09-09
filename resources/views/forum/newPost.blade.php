@@ -10,14 +10,17 @@
         </h3>
         <form method="POST">
             {{ csrf_field() }}
-            <input type="hidden" name="section_id" value="{{ request()->route('sid') }}">
             <div class="form-group">
                 <label class="control-label">Sessão</label>
                 <input class="form-control" type="text" value="{{ $section->title }}" placeholder="Nome da sessão" disabled>
             </div>
             <div class="form-group">
                 <label class="control-label">Tópico</label>
-                <input class="form-control" type="text" name="topic_title" value="" placeholder="Nome do novo tópico">
+                @if($topic)
+                    <input class="form-control" type="text" name="topic_title" value="{{ $topic->title }}" placeholder="Nome do novo tópico" disabled>
+                @else
+                    <input class="form-control" type="text" name="topic_title" value="" placeholder="Nome do novo tópico">
+                @endif
             </div>
             <div class="form-group">
                 <label class="control-label">Conteúdo</label>

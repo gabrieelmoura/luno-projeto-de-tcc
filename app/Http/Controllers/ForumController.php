@@ -75,17 +75,26 @@ class ForumController extends Controller {
     {
         $this->classroom->loadDefault();
         return view('forum.section', [
-            'section' => Section::find($id),
+            'section' => Section::with(['topics' => function ($query) {
+                $query->withCount('posts');
+                $query->with('creator');
+                $query->with('lastPost.creator');
+            }])->find($id),
             'classroom' => $this->classroom
         ]);
     }
 
     public function topic()
     {
-        $this->classroom->loadDefault();
-        return view('forum.topic', [
-            'classroom' => $this->classroom
-        ]);
+        $classroom = $this->classroom->loadDefault();
+        $section = $classroom->sections()->findOrFail(request()->route('sid'));
+        $topic = $section->topics()->findOrFail(request()->route('tid'));
+        $posts = $topic->posts()->with(['creator' => function ($query) {
+            $query->withCount('topics');
+            $query->withCount('posts');
+            $query->with('avatar');
+        }])->paginate(20);
+        return view('forum.topic', compact('classroom', 'section', 'topic', 'posts'));
     }
 
     public function calendar()
@@ -139,6 +148,14 @@ class ForumController extends Controller {
         $chapter->creator_id = \Auth::id();
         $chapter->classroom_id = $id;
         $chapter->save();
+        if (request()->hasFile('media')) {
+            Media::newFromUploadedFile(request()->file('media'), 'chapter');
+            $media->title = "Capítulo " . $chapter->title;
+            $media->owner_id = \Auth::id();
+            $media->classroom_id = $id;
+            $media->save();
+            $chapter->media_id = $media->id;
+        }
         return redirect(route('forum.home', compact('id')));
     }
 
@@ -209,31 +226,30 @@ class ForumController extends Controller {
         return redirect()->back();
     }
 
-    public function newPost($id, $sid)
+    public function newPost()
     {
         $classroom = $this->classroom->loadDefault();
-        $section = Section::findOrFail($sid);
-        return view('forum.newPost', compact('classroom', 'section'));
+        $section = $classroom->sections()->findOrFail(request()->route('sid'));
+        $topic = ($tid = request()->route('tid')) ? $section->topics()->findOrFail($tid) : null;
+        return view('forum.newPost', compact('classroom', 'section', 'topic'));
     }
 
     public function newPostAction()
     {
-        if (!request('topic_id')) {
+        if (!($topic_id = request()->route('tid'))) {
             $topic = new Topic();
             $topic->title = request('topic_title');
             $topic->creator_id = \Auth::id();
-            $topic->section_id = request('section_id');
+            $topic->section_id = request()->route('sid');
             $topic->save();
             $topic_id = $topic->id;
-        } else {
-            $topic_id = request('topic_id');
         }
         $post = new Post();
         $post->content = request('content');
         $post->creator_id = \Auth::id();
         $post->topic_id = $topic_id;
         $post->save();
-        return redirect(route('forum.topic', ['id' => $this->classroom->id, 'tid' => $topic_id]));
+        return redirect(route('forum.topic', ['id' => $this->classroom->id, 'tid' => $topic_id, 'sid' => request()->route('sid')]));
     }
 
 }
