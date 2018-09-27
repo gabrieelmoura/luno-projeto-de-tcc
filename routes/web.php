@@ -19,6 +19,7 @@ Route::post( '/register',    'LoginController@register' )->name('login.register'
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get(  '/profile/{id}',     'SiteController@profile'            )->name('site.user');
     Route::get(  '/profile',          'SiteController@profile'            )->name('site.profile');
     Route::get(  '/logout',           'LoginController@logout'            )->name('login.logout');
     Route::get(  '/editar-perfil',    'SiteController@editProfile'        )->name('site.edit-profile');
@@ -58,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get(  '/material/{cid}',               'ForumController@chapter'               )->name('forum.chapter');
         Route::get(  '/turma',                        'ForumController@students'              )->name('forum.students');
         Route::get(  '/lancar-notas',                 'ForumController@grades'                )->name('forum.grades');
+        Route::get(  '/media',                        'ForumController@media'                 )->name('forum.media');
 
     });
 

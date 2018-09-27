@@ -274,3 +274,9 @@ alter table luno_user_classroom change column role role varchar(32) default 'stu
 -- ####################################################################################################
 
 alter table luno_posts add column topic_id int after content;
+
+-- ####################################################################################################
+-- # Atualizações: 11/09/2018
+-- ####################################################################################################
+
+ALTER TABLE `luno`.`luno_chapters` CHANGE COLUMN `content` `content` TEXT NULL, ADD COLUMN `media_id` INT(11) NULL AFTER `updated_at`;

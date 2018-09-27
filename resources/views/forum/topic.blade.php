@@ -12,7 +12,7 @@
             <div class="forum__post clearfix {{ !$loop->first ? 'forum__post--response' : '' }}">
                 <div class="forum__post__header">
                     <span class="forum__post__user-name">
-                        {{ $post->creator->user_name }}
+                        <a href="{{ route('site.user', ['id' => $post->creator->id]) }}">{{ $post->creator->user_name }}</a>
                     </span>
                     <img src="{{ $post->creator->avatar->location }}" class="forum__post__user-photo">
                     <table class="forum__post__user-statistics">

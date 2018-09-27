@@ -20,7 +20,7 @@
                 <nav id="topbar__nav">
                     <ul>
                         <li><a href="{{ route('site.home') }}">Voltar para o Site</a></li>
-                        <li><a href="{{ route('site.home') }}">Perfil</a></li>
+                        <li><a href="{{ route('site.profile') }}">Perfil</a></li>
                     </ul>
                 </nav>
             </div>

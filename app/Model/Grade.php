@@ -16,21 +16,21 @@ class Grade extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, "user_id", "id");
+        return $this->belongsTo(User::class, "user_id", "id")->withDefault();
     }
 
     public function task()
     {
-        return $this->belongsTo(Task::class, "task_id", "id");
+        return $this->belongsTo(Task::class, "task_id", "id")->withDefault();
     }
 
     public function avaliator()
     {
-        return $this->belongsTo(User::class, "avaliator_id", "id");
+        return $this->belongsTo(User::class, "avaliator_id", "id")->withDefault();
     }
 
     public function media()
     {
-        return $this->belongsTo(Media::class, "media_id", "id");
+        return $this->belongsTo(Media::class, "media_id", "id")->withDefault();
     }
 }

@@ -13,11 +13,16 @@ class Chapter extends Model
 
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class, "classroom_id", "id");
+        return $this->belongsTo(Classroom::class, "classroom_id", "id")->withDefault();
     }
 
     public function creator()
     {
-        return $this->belongsTo(User::class, "creator_id", "id");
+        return $this->belongsTo(User::class, "creator_id", "id")->withDefault();
+    }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class, "media_id")->withDefault();
     }
 }

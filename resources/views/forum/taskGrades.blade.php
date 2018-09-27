@@ -40,11 +40,16 @@
                 <tbody>
                     @forelse($naoAvaliados as $grade)
                         <tr>
+                            <td style="padding-left: 0;">
+                                <a download class="btn btn-primary btn-sm {{ $grade->media->exists ? '' :  'disabled' }}" style="height: 30px; padding: 5px" href="{{ $grade->media->location }}">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </td>
                             <td style="padding-left: 0; white-space: nowrap;">
-                                {{ $grade->user->user_name }}
+                                <a href="{{ route('site.user', ['id' => $grade->user->id]) }}">{{ $grade->user->user_name }}</a>
                             </td>
                             <td style="width: 99%">
-                                {{ $grade->msg }}
+                                <pre>{{ $grade->msg }}</pre>
                             </td>
                             <td style="padding-right: 0; white-space: nowrap;">
                                 <form method="POST">
@@ -73,8 +78,13 @@
                 <tbody>
                     @forelse($avaliados as $grade)
                         <tr>
-                            <td style="padding-left: 0; white-space: nowrap;">
-                                {{ $grade->user->user_name }}
+                            <td style="padding-left: 0;">
+                                <button class="btn btn-primary btn-sm" style="height: 30px; padding: 0 5px">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </td>
+                            <td style="white-space: nowrap; padding-left: 0;">
+                                <a href="{{ route('site.user', ['id' => $grade->user->id]) }}">{{ $grade->user->user_name }}</a>
                             </td>
                             <td style="width: 99%">
                                 {{ $grade->msg }}
@@ -88,6 +98,11 @@
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                 </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <pre>{{ $grade->msg }}</pre>
                             </td>
                         </tr>
                     @empty

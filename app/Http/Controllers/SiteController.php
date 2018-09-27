@@ -40,10 +40,13 @@ class SiteController extends Controller
 
     public function profile()
     {
-        $user = Auth::user()->load(['avatar', 'registrations.course']);
-        return view('site.profile', [
-            "user" => $user
-        ]);
+        if ($id = request()->route('id')) {
+            $user = User::withCount('topics')->withCount('posts')->findOrFail($id);
+        } else {
+            $user = User::withCount('topics')->withCount('posts')->findOrFail(Auth::id());
+        };
+        $user->load(['avatar', 'registrations.course']);
+        return view('site.profile', compact('user'));
     }
 
     public function newCourse()

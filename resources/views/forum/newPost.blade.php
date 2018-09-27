@@ -26,7 +26,7 @@
                 <label class="control-label">Conteúdo</label>
                 <textarea rows="10" class="form-control" name="content"></textarea>
             </div>
-            <tabela-de-anexos></tabela-de-anexos>
+            <!-- <tabela-de-anexos></tabela-de-anexos> -->
             <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit" name="button">
                     Criar Post!

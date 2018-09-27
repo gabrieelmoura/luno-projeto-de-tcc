@@ -6,15 +6,17 @@
             <div class="col-md-2">
                 @if($user->avatar)
                     <div id="profilepanel__avatar">
-                        <img class="img-fluid" src="{{ Auth::user()->avatar->location }}" alt="Foto de perfil de {{ $user->user_name }}">
+                        <img class="img-fluid" src="{{ $user->avatar->location }}" alt="Foto de perfil de {{ $user->user_name }}">
                     </div>
                 @endif
-                <nav id="profilepanel__side-nav">
-                    <ul>
-                        <li><a href="/editar-perfil">Editar Perfil</a></li>
-                        <li><a href="/logout">Sair</a></li>
-                    </ul>
-                </nav>
+                @if($user->id == Auth::id())
+                    <nav id="profilepanel__side-nav">
+                        <ul>
+                            <li><a href="/editar-perfil">Editar Perfil</a></li>
+                            <li><a href="/logout">Sair</a></li>
+                        </ul>
+                    </nav>
+                @endif
             </div>
             <div class="col-md-10">
                 <h2 class="profilepanel__title">Perfil</h2>
@@ -51,6 +53,18 @@
                             {{ $user->job }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>Tópicos</th>
+                        <td>
+                            {{ $user->topics_count }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Posts</th>
+                        <td>
+                            {{ $user->posts_count }}
+                        </td>
+                    </tr>
                 </table>
                 <h2 class="profilepanel__title">Sobre</h2>
                 <div>{{ $user->about }}</div>
@@ -62,9 +76,7 @@
                             @foreach($user->registrations as $registration)
                                 <tr>
                                     <td>
-                                        {{ $registration->description }}
-                                    </td>
-                                    <td>
+                                        {{ $registration->description }} -
                                         {{ $registration->course->course_name }}
                                     </td>
                                 </tr>

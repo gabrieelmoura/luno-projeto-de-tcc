@@ -147,23 +147,23 @@ class ForumController extends Controller {
         $chapter = new Chapter(request()->all());
         $chapter->creator_id = \Auth::id();
         $chapter->classroom_id = $id;
-        $chapter->save();
         if (request()->hasFile('media')) {
-            Media::newFromUploadedFile(request()->file('media'), 'chapter');
+            $media = Media::newFromUploadedFile(request()->file('media'), 'chapter');
             $media->title = "Capítulo " . $chapter->title;
             $media->owner_id = \Auth::id();
             $media->classroom_id = $id;
             $media->save();
             $chapter->media_id = $media->id;
         }
+        $chapter->save();
         return redirect(route('forum.home', compact('id')));
     }
 
-    public function chapter($id, $cid)
+    public function chapter()
     {
-        $this->classroom->loadDefault();
-        $chapter = Chapter::find($cid);
-        return view('forum.chapter', ['classroom' => $this->classroom, 'chapter' => $chapter ]);
+        $classroom = $this->classroom->loadDefault();
+        $chapter = $classroom->chapters()->findOrFail(request()->route('cid'));
+        return view('forum.chapter', compact(['classroom', 'chapter']));
     }
 
     public function registrations()
@@ -207,11 +207,11 @@ class ForumController extends Controller {
         return view('forum.grades', ['classroom' => $this->classroom]);
     }
 
-    public function taskGrades($tid)
+    public function taskGrades()
     {
         $this->classroom->loadDefault();
         $classroom = $this->classroom;
-        $task = \App\Model\Task::find($tid);
+        $task = $classroom->tasks()->findOrFail(request()->route('tid'));
         $naoAvaliados = $task->grades()->with('user')->whereNull('avaliator_id')->get();
         $avaliados = $task->grades()->with('user')->whereNotNull('avaliator_id')->get();
         return view('forum.taskGrades', compact('classroom', 'task', 'naoAvaliados', 'avaliados'));
@@ -251,5 +251,4 @@ class ForumController extends Controller {
         $post->save();
         return redirect(route('forum.topic', ['id' => $this->classroom->id, 'tid' => $topic_id, 'sid' => request()->route('sid')]));
     }
-
 }

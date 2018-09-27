@@ -22,7 +22,7 @@
                 @foreach($classroom->registrations as $registration)
                     <tr>
                         <td style="padding-left: 0; width: 99%">
-                            {{ $registration->user_name }}
+                            <a href="{{ route('site.user', ['id' => $registration->id]) }}">{{ $registration->user_name }}</a>
                         </td>
                         <td class="text-right" style="white-space: nowrap;">
                             @if($registration->pivot->role == 'student')

@@ -13,7 +13,7 @@
                 @forelse($classroom->registrations as $pending)
                     <tr>
                         <td style="padding-left: 0; width: 99%">
-                            {{ $pending->user_name }}
+                            <a href="{{ route('site.user', ['id' => $pending->id]) }}">{{ $pending->user_name }}</a>
                         </td>
                         <td style="white-space: nowrap;">
                             {{ $pending->pivot->created_at->format('d/m/Y h:i') }}

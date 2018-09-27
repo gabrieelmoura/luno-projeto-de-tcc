@@ -41,7 +41,7 @@
                             {{ $topic->posts_count }}
                         </td>
                         <td style="text-align: center;">
-                            <a href="#">{{ $topic->creator->user_name }}</a>
+                            <a href="{{ route('site.user', ['id' => $topic->creator->id]) }}">{{ $topic->creator->user_name }}</a>
                         </td>
                         <td style="text-align: right;">
                             {{ $topic->lastPost->created_at->diffForHumans() }} por {{ $topic->lastPost->creator->user_name }}
