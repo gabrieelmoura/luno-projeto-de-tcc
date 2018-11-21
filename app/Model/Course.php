@@ -38,4 +38,9 @@ class Course extends Model
     {
         return $this->belongsTo(Media::class, "image_id", "id");
     }
+
+    public function podeSerEditadoPor($user)
+    {
+        return $user && $this->creator_id == $user->id;
+    }
 }

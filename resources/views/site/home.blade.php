@@ -23,7 +23,7 @@
         <div class="classroom-list">
             @foreach($courses as $course)
                 <div class="classroom-box">
-                    <img class="classroom-box__featured-img" src="{{ $course->image->location }}">
+                    <img class="classroom-box__featured-img" src="{{ route('storage.course', $course->id) }}">
                     <h2 class="classroom-box__title">{{ $course->course_name }}</h2>
                     <span class="classroom-box__info">Professor <a href="#">{{ $course->creator->user_name }}</a></span>
                     <span class="classroom-box__info">{{ $course->open_classrooms_count }} turmas abertas</span>

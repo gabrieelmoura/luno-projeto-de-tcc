@@ -44,14 +44,16 @@
                         @endforelse
                     </ul>
                 </nav>
-                <div class="forum__nav__label">Pedagógico</div>
-                <nav>
-                    <ul>
-                        <li><a href="{{ route('forum.registrations', ['id' => $classroom->id]) }}">Aprovar Matriculas</a></li>
-                        <li><a href="{{ route('forum.new-chapter', ['id' => $classroom->id ]) }}">Postar Material</a></li>
-                        <li><a href="{{ route('forum.grades', ['id' => $classroom->id ]) }}">Lançar Notas</a></li>
-                    </ul>
-                </nav>
+                @if($classroom->podeSerEditadoPor(Auth::user()))
+                    <div class="forum__nav__label">Pedagógico</div>
+                    <nav>
+                        <ul>
+                            <li><a href="{{ route('forum.registrations', ['id' => $classroom->id]) }}">Aprovar Matriculas</a></li>
+                            <li><a href="{{ route('forum.new-chapter', ['id' => $classroom->id ]) }}">Postar Material</a></li>
+                            <li><a href="{{ route('forum.grades', ['id' => $classroom->id ]) }}">Lançar Notas</a></li>
+                        </ul>
+                    </nav>
+                @endif
                 <div class="forum__nav__label">Material</div>
                 <nav>
                     <ul>

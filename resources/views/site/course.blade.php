@@ -4,7 +4,7 @@
     <section class="course-details">
         <header class="clearfix">
             @if($course->image)
-                <img class="course-details__front-img" src="{{ $course->image->location }}">
+                <img class="course-details__front-img" src="{{ route('storage.course', ['id' => $course->id]) }}">
             @endif
             <div class="course-details__header__content">
                 <h1>{{ $course->course_name }}</h1>
@@ -38,9 +38,7 @@
             <h2>Autor</h2>
             @if($course->creator)
                 <div class="course-details__teacher clearfix">
-                    @if($course->creator->avatar)
-                        <img src="{{ $course->creator->avatar->location }}" class="course-details__teacher__img">
-                    @endif
+                    <img src="{{ route('storage.avatar', ['id' => $course->creator->id]) }}" class="course-details__teacher__img">
                     <div class="course-details__teacher__bio">
                         <h3>{{ $course->creator->user_name }}</h3>
                         <p>
@@ -90,18 +88,20 @@
                     </tbody>
                 </table>
             </div>
-            <h2>Ações</h2>
-            <div>
-                <hr>
-                <a href="#" class="btn btn-primary btn-sm">Editar Curso</a>
-                <a href="#" class="btn btn-primary btn-sm">Ocultar Curso</a>
-                <a href="/nova-turma/{{ $course->id }}" class="btn btn-primary btn-sm">Criar Nova Turma</a>
-                <hr>
-                <a href="#" class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash"></i>
-                    Deletar Curso
-                </a>
-            </div>
+            @if($course->podeSerEditadoPor(Auth::user()))
+                <h2>Ações</h2>
+                <div>
+                    <hr>
+                    <a href="#" class="btn btn-primary btn-sm">Editar Curso</a>
+                    <a href="#" class="btn btn-primary btn-sm">Ocultar Curso</a>
+                    <a href="/nova-turma/{{ $course->id }}" class="btn btn-primary btn-sm">Criar Nova Turma</a>
+                    <hr>
+                    <a href="#" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                        Deletar Curso
+                    </a>
+                </div>
+            @endif
         </main>
     </section>
 @endsection

@@ -6,7 +6,7 @@
             <div class="col-md-2">
                 @if($user->avatar)
                     <div id="profilepanel__avatar">
-                        <img class="img-fluid" src="{{ $user->avatar->location }}" alt="Foto de perfil de {{ $user->user_name }}">
+                        <img class="img-fluid" src="{{ route('storage.avatar', ['id' => $user->id]) }}" alt="Foto de perfil de {{ $user->user_name }}">
                     </div>
                 @endif
                 @if($user->id == Auth::id())

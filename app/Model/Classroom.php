@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Contracts\ActualClassroom;
 
-class Classroom extends Model
+class Classroom extends Model implements ActualClassroom
 {
     protected $table = "luno_classrooms";
     protected $fillable = [
@@ -71,5 +72,12 @@ class Classroom extends Model
     public function calendar()
     {
         return $this->hasMany(Calendar::class, "classroom_id");
+    }
+
+    public function podeSerEditadoPor($user)
+    {
+        return $user && \DB::select("select 1 from luno_user_classroom where user_id = ? and classroom_id = ? and role = 'teacher'", [
+            $user->id, $this->id
+        ]);
     }
 }

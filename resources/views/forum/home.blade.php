@@ -10,11 +10,13 @@
         </h3>
         <div class="luno-floating-buttons-holder">
             <h2>Quadro de Avisos</h2>
-            <div class="luno-floating-buttons">
-                <a href="/forum/{{ $classroom->id }}/editar-quadro" class="btn-sm btn-primary btn">
-                    <i class="fa fa-pencil"></i> Editar
-                </a>
-            </div>
+            @if($classroom->podeSerEditadoPor(Auth::user()))
+                <div class="luno-floating-buttons">
+                    <a href="/forum/{{ $classroom->id }}/editar-quadro" class="btn-sm btn-primary btn">
+                        <i class="fa fa-pencil"></i> Editar
+                    </a>
+                </div>
+            @endif
         </div>
         <p>
             {{ $classroom->welcome_text }}
@@ -51,13 +53,15 @@
                         </td>
                     </tr>
                 @endforelse
-                <tr>
-                    <td colspan="5" style="padding-left: 0; padding-right: 0">
-                        <a href="{{ route('forum.new-task', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
-                            <i class="fa fa-plus"></i> Criar Nova Tarefa
-                        </a>
-                    </td>
-                </tr>
+                @if($classroom->podeSerEditadoPor(Auth::user()))
+                    <tr>
+                        <td colspan="5" style="padding-left: 0; padding-right: 0">
+                            <a href="{{ route('forum.new-task', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
+                                <i class="fa fa-plus"></i> Criar Nova Tarefa
+                            </a>
+                        </td>
+                    </tr>
+                @endif
             </tbody>
         </table>
         <h2>Fórum</h2>
@@ -82,13 +86,15 @@
                         </td>
                     </tr>
                 @endforelse
-                <tr>
-                    <td colspan="2" style="padding-left: 0; padding-right: 0">
-                        <a href="{{ route('forum.new-section', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
-                            <i class="fa fa-plus"></i> Criar Nova Sessão
-                        </a>
-                    </td>
-                </tr>
+                @if($classroom->podeSerEditadoPor(Auth::user()))
+                    <tr>
+                        <td colspan="2" style="padding-left: 0; padding-right: 0">
+                            <a href="{{ route('forum.new-section', ['id' => $classroom->id ]) }}" class="btn-sm btn-success btn">
+                                <i class="fa fa-plus"></i> Criar Nova Sessão
+                            </a>
+                        </td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

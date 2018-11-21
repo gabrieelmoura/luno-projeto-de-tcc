@@ -7,6 +7,7 @@ use App\Model\Media;
 use App\Model\Course;
 use App\Model\Classroom;
 use App\Model\User;
+use App\Contracts\StorageServiceContract;
 
 class SiteController extends Controller 
 {
@@ -98,17 +99,12 @@ class SiteController extends Controller
         ]);
     }
 
-    public function editProfileAction()
+    public function editProfileAction(StorageServiceContract $storage)
     {
         $user = \Auth::user();
         $user->fill(request()->all());
         if (request()->hasFile('avatar')) {
-            $file = request()->file('avatar');
-            $image = Media::newFromUploadedFile($file, 'avatar');
-            $image->title = "Avatar of " . $user->user_name . " - " . date('Y-m-d');
-            $image->owner_id = \Auth::id();
-            $image->save();
-            $user->avatar_id = $image->id;
+            $user->avatar_id = $storage->storeAvatarFile(request()->file('avatar'), "Avatar of " . $user->user_name . " - " . date('Y-m-d'))->id;
         }
         $user->save();
         return redirect('/profile');

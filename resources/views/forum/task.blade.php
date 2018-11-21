@@ -52,8 +52,8 @@
                 </tbody>
             </table>
         </div>
-        <br>
         @if(!$task->myGrade)
+            <br>
             <h2>Entregar</h2>
             <form method="POST" enctype="multipart/form-data" action="{{ route('forum.task-submit', ['id' => $classroom->id]) }}">
                 {{ csrf_field() }}
@@ -72,6 +72,25 @@
                 @endif
                 <button class="btn btn-primary">Entregar!</button>
             </form>
+        @else
+            <br>
+            <h2>Sua Entrega</h2>
+            <div>
+                <p>{{ $task->myGrade->msg }}</p>
+                @if($task->myGrade->media)
+                    <div style="margin-top: 20px">
+                        <a download href="{{ route('storage.grade', ['id' => $task->myGrade->id]) }}" class="btn btn-primary">
+                            <i class="fa fa-download"></i> Download
+                        </a>
+                    </div>
+                @endif
+            </div>
         @endif
+        <br>
+        <h2>Ações</h2>
+        <div>
+            <a href="{{ route('forum.edit-task', ['id' => $classroom->id, 'tid' => $task->id]) }}" class="btn btn-primary">Editar</a>
+            <a href="{{ route('forum.delete-task', ['id' => $classroom->id, 'tid' => $task->id]) }}" class="btn btn-danger">Deletar</a>
+        </div>
     </div>
 @endsection

@@ -19,6 +19,14 @@
                             <td style="width: 99%; padding-right: 0">
                                 {{ $calendar->content }}
                             </td>
+                            <td>
+                                <form method="POST" action="{{ route('forum.calendar-delete-action', ['id' => $classroom->id, 'cid' => $calendar->id]) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -30,18 +38,20 @@
                 </tbody>
             </table>
         </div>
-        <h2 class="forum__subtitle">Novo Item</h2>
-        <form method="POST">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label>Data</label>
-                <input type="date" name="event_date" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea class="form-control" name="content"></textarea>
-            </div>
-            <button class="btn btn-primary">Enviar</button>
-        </form>
+        @if($classroom->podeSerEditadoPor(Auth::user()))
+            <h2 class="forum__subtitle">Novo Item</h2>
+            <form method="POST">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label>Data</label>
+                    <input type="date" name="event_date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" name="content"></textarea>
+                </div>
+                <button class="btn btn-primary">Enviar</button>
+            </form>
+        @endif
     </div>
 @endsection
