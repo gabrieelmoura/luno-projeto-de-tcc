@@ -13,22 +13,22 @@
                     <label class="control-label">
                         Título*
                     </label>
-                    <input type="text" class="form-control" name="course_name">
+                    <input type="text" class="form-control" name="course_name" required>
                     <small class="form-text text-muted">
                         Escolha um título que ajude os usuários a encontrar o curso no site.
                     </small>
                 </div>
                 <div class="form-group">
                     <label class="control-label">
-                        Sub título
+                        Sub título*
                     </label>
-                    <input type="text" class="form-control" name="subtitle">
+                    <input type="text" class="form-control" name="subtitle" required>
                 </div>
                 <div class="form-group">
                     <label class="control-label">
                         Descrição*
                     </label>
-                    <textarea class="form-control" rows="10" name="description"></textarea>
+                    <textarea class="form-control" rows="10" name="description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label">

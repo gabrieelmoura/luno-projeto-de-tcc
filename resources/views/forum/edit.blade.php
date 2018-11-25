@@ -12,28 +12,28 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="control-label">Descrição*</label>
-                <input type="text" name="description" class="form-control" value="{{ $classroom->description }}">
+                <input type="text" name="description" class="form-control" value="{{ $classroom->description }}" required>
                 <small class="form-text text-muted">
                     Ex: Turma 1001
                 </small>
             </div>
             <div class="form-group">
                 <label class="control-label">Início*</label>
-                <input type="date" name="start_date" class="form-control" value="{{ $classroom->start_date ? $classroom->start_date->format('Y-m-d') : '' }}">
+                <input type="date" name="start_date" class="form-control" value="{{ $classroom->start_date ? $classroom->start_date->format('Y-m-d') : '' }}" required>
                 <small class="form-text text-muted">
                     Data onde as atividades da turma começam
                 </small>
             </div>
             <div class="form-group">
                 <label class="control-label">Fim*</label>
-                <input type="date" name="end_date" class="form-control" value="{{ $classroom->end_date ? $classroom->end_date->format('Y-m-d') : '' }}">
+                <input type="date" name="end_date" class="form-control" value="{{ $classroom->end_date ? $classroom->end_date->format('Y-m-d') : '' }}" required>
                 <small class="form-text text-muted">
                     Data onde as atividades da turma terminam
                 </small>
             </div>
             <div class="form-group">
                 <label class="control-label">Máximo de alunos*</label>
-                <input type="number" name="max_students" class="form-control" value="{{ $classroom->max_students }}">
+                <input type="number" name="max_students" class="form-control" value="{{ $classroom->max_students }}" required>
                 <small class="form-text text-muted">
                     Este número não determina quantos alunos podem entrar na turma, é apenas um indicador para os visitantes do site
                 </small>

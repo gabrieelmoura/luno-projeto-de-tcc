@@ -12,11 +12,11 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="control-label">Título</label>
-                <input class="form-control" type="text" name="title" value="{{ $section->title }}">
+                <input class="form-control" type="text" name="title" value="{{ $section->title }}" required>
             </div>
             <div class="form-group">
                 <label class="control-label">Sub Título</label>
-                <input class="form-control" type="text" name="subtitle" value="{{ $section->subtitle }}">
+                <input class="form-control" type="text" name="subtitle" value="{{ $section->subtitle }}" required>
             </div>
             <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit" name="button">

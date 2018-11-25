@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Conteúdo</label>
-                <textarea rows="10" class="form-control" name="content">{{ $post->content }}</textarea>
+                <textarea rows="10" class="form-control" name="content" required>{{ $post->content }}</textarea>
             </div>
             <!-- <tabela-de-anexos></tabela-de-anexos> -->
             <div class="form-group text-center">

@@ -66,7 +66,7 @@ class SiteController extends Controller
         }
         $course->creator_id = \Auth::id();
         $course->save();
-        return redirect('/course/' . $course->id);
+        return redirect(route('site.course', ['id' => $course]));
     }
 
     public function newClassroom($id)

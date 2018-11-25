@@ -12,11 +12,11 @@
             @csrf
             <div class="form-group">
                 <label class="control-label">Título</label>
-                <input type="text" name="title" value="{{ $chapter->title }}" class="form-control">
+                <input type="text" name="title" value="{{ $chapter->title }}" class="form-control" required>
             </div>
             <div class="form-group">
                 <label class="control-label">Conteúdo</label>
-                <textarea name="content" class="form-control">{{ $chapter->content }}</textarea>
+                <textarea name="content" class="form-control" required>{{ $chapter->content }}</textarea>
             </div>
             <div class="form-group">
                 <label class="control-label">Arquivo</label><br>

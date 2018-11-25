@@ -19,12 +19,12 @@
                 @if($topic)
                     <input class="form-control" type="text" name="topic_title" value="{{ $topic->title }}" placeholder="Nome do novo tópico" disabled>
                 @else
-                    <input class="form-control" type="text" name="topic_title" value="" placeholder="Nome do novo tópico">
+                    <input class="form-control" type="text" name="topic_title" value="" placeholder="Nome do novo tópico" required>
                 @endif
             </div>
             <div class="form-group">
                 <label class="control-label">Conteúdo</label>
-                <textarea rows="10" class="form-control" name="content"></textarea>
+                <textarea rows="10" class="form-control" name="content" required></textarea>
             </div>
             <!-- <tabela-de-anexos></tabela-de-anexos> -->
             <div class="form-group text-center">
