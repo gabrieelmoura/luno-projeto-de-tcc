@@ -64,6 +64,12 @@
                         @endforelse
                     </ul>
                 </nav>
+                <div class="forum__nav__label">Administrativo</div>
+                <nav>
+                    <ul>
+                        <li><a href="{{ route('forum.edit', ['id' => $classroom->id]) }}">Editar Turma</a></li>
+                    </ul>
+                </nav>
             </div>
             <div id="forum__content">
                 @yield('forum.content')

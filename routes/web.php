@@ -17,28 +17,32 @@ Route::get('/storage/course/{id}',  'StorageController@course' )->name('storage.
 Route::get('/storage/chapter/{id}', 'StorageController@chapter')->name('storage.chapter');
 
 Route::get('/',            'SiteController@home'     )->name('site.home');
-Route::get('/course/{id}', 'SiteController@course'   )->name('site.course');
-Route::get('/login',       'SiteController@loginPage')->name('site.login');
+Route::get('/curso/{id}',  'SiteController@course'   )->name('site.course');
+Route::get('/login',       'SiteController@loginPage')->name('login');
 Route::post('/auth',       'LoginController@auth'    )->name('login.auth');
 Route::post('/register',   'LoginController@register')->name('login.register');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/profile/{id}',     'SiteController@profile'           )->name('site.user');
-    Route::get('/profile',          'SiteController@profile'           )->name('site.profile');
+    Route::get('/profile/{id}',         'SiteController@profile'           )->name('site.user');
+    Route::get('/profile',              'SiteController@profile'           )->name('site.profile');
 
-    Route::get('/logout',           'LoginController@logout'           )->name('login.logout');
+    Route::get('/logout',               'LoginController@logout'           )->name('login.logout');
 
-    Route::get('/editar-perfil',    'SiteController@editProfile'       )->name('site.edit-profile');
-    Route::post('/editar-perfil',   'SiteController@editProfileAction' )->name('site.edit-profile-action');
+    Route::get('/editar-perfil',        'SiteController@editProfile'       )->name('site.edit-profile');
+    Route::post('/editar-perfil',       'SiteController@editProfileAction' )->name('site.edit-profile-action');
 
-    Route::get('/novo-curso',       'SiteController@newCourse'         )->name('site.new-course');
-    Route::post('/novo-curso',      'SiteController@newCourseAction'   )->name('site.new-course-action');
+    Route::get('/novo-curso',           'SiteController@newCourse'         )->name('site.new-course');
+    Route::post('/novo-curso',          'SiteController@newCourseAction'   )->name('site.new-course-action');
+    Route::get('/editar-curso/{id}',    'SiteController@editCourse'        )->name('site.edit-course');
+    Route::post('/editar-curso/{id}',   'SiteController@editCourseAction'  )->name('site.edit-course-action');
+    Route::get('/deletar-curso/{id}',   'SiteController@deleteCourse'      )->name('site.delete-course');
+    Route::post('/deletar-curso/{id}',  'SiteController@deleteCourseAction')->name('site.delete-course-action');
 
-    Route::get('/nova-turma/{id}',  'SiteController@newClassroom'      )->name('site.new-classroom');
-    Route::post('/nova-turma/{id}', 'SiteController@newClassroomAction')->name('site.new-classroom-action');;
+    Route::get('/nova-turma/{id}',      'SiteController@newClassroom'      )->name('site.new-classroom');
+    Route::post('/nova-turma/{id}',     'SiteController@newClassroomAction')->name('site.new-classroom-action');;
 
-    Route::post('/matricular',      'SiteController@register'          )->name('site.classroom-register');
+    Route::post('/matricular',          'SiteController@register'          )->name('site.classroom-register');
 
     Route::group(['prefix' => 'forum/{id}'], function () {
 
@@ -47,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/nova-sessao',                   'ForumController@newSection'           )->name('forum.new-section');
         Route::post('/nova-sessao',                  'ForumController@newSectionAction'     )->name('forum.new-section-action');
+        Route::get('/editar-sessao/{sid}',           'ForumController@editSection'          )->name('forum.edit-section');
+        Route::post('/editar-sessao/{sid}',          'ForumController@editSectionAction'    )->name('forum.edit-section-action');
+        Route::get('/deletar-sessao/{sid}',          'ForumController@deleteSection'        )->name('forum.delete-section');
+        Route::post('/deletar-sessao/{sid}',         'ForumController@deleteSectionAction'  )->name('forum.delete-section-action');
 
         Route::get('/calendar',                      'ForumController@calendar'             )->name('forum.calendar');
         Route::post('/calendar',                     'ForumController@calendarAction'       )->name('forum.calendar-action');
@@ -64,8 +72,17 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/lancar-notas/{tid}',            'ForumController@taskGrades'           )->name('forum.taskGrades');
         Route::post('/lancar-notas/{tid}',           'ForumController@taskGradesAction'     )->name('forum.taskGradesAction');
+
         Route::get('/novo-post/{sid}',               'ForumController@newPost'              )->name('forum.newTopic');
         Route::post('/novo-post/{sid}',              'ForumController@newPostAction'        )->name('forum.newTopicAction');
+
+        Route::get('/editar-post/{pid}',             'ForumController@editPost'             )->name('forum.edit-post');
+        Route::post('/editar-post/{pid}',            'ForumController@editPostAction'       )->name('forum.edit-post-action');
+        Route::get('/deletar-post/{pid}',            'ForumController@deletePost'           )->name('forum.delete-post');
+        Route::post('/deletar-post/{pid}',           'ForumController@deletePostAction'     )->name('forum.delete-post-action');
+
+        Route::get('/deletar-topico/{tid}',          'ForumController@deleteTopic'          )->name('forum.delete-topic');
+        Route::post('/deletar-topico/{tid}',         'ForumController@deleteTopicAction'    )->name('forum.delete-topic-action');
 
         Route::get('/novo-post/{sid}/topico/{tid}',  'ForumController@newPost'              )->name('forum.newPost');
         Route::post('/novo-post/{sid}/topico/{tid}', 'ForumController@newPostAction'        )->name('forum.newPostAction');
@@ -80,6 +97,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/entregar-tarefa',              'ForumController@taskSubmit'           )->name('forum.task-submit');
 
         Route::get('/',                              'ForumController@home'                 )->name('forum.home');
+
+        Route::get('/editar',                        'ForumController@edit'                 )->name('forum.edit');
+        Route::post('/editar',                       'ForumController@editAction'           )->name('forum.edit-action');
+        Route::get('/deletar',                       'ForumController@delete'               )->name('forum.delete');
+        Route::post('/deletar',                      'ForumController@deleteAction'         )->name('forum.delete-action');
+
         Route::get('/sessao/{sid}',                  'ForumController@section'              )->name('forum.section');
         Route::get('/sessao/{sid}/topico/{tid}',     'ForumController@topic'                )->name('forum.topic');
         Route::get('/material/{cid}',                'ForumController@chapter'              )->name('forum.chapter');

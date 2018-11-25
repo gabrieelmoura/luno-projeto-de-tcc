@@ -10,11 +10,19 @@
         </ol>
         @foreach($posts as $post)
             <div class="forum__post clearfix {{ !$loop->first ? 'forum__post--response' : '' }}">
+                <div class="forum__post__floating-options">
+                    <a href="{{ route('forum.edit-post', ['id' => $classroom->id, 'pid' => $post->id]) }}" class="btn btn-primary btn-sm">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="{{ route('forum.delete-post', ['id' => $classroom->id, 'pid' => $post->id]) }}" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
                 <div class="forum__post__header">
                     <span class="forum__post__user-name">
                         <a href="{{ route('site.user', ['id' => $post->creator->id]) }}">{{ $post->creator->user_name }}</a>
                     </span>
-                    <img src="{{ $post->creator->avatar->location }}" class="forum__post__user-photo">
+                    <img src="{{ route('storage.avatar', ['id' => $post->creator->id]) }}" class="forum__post__user-photo">
                     <table class="forum__post__user-statistics">
                         <tr>
                             <td>Mensagens</td>
@@ -44,6 +52,9 @@
                 {{ $posts->links() }}
             </div>
             <div class="pull-right">
+                <a href="{{ route('forum.delete-topic', ['id' => $classroom->id, 'tid' => $topic->id]) }}" class="btn btn-danger">
+                    Deletar
+                </a>
                 <a href="{{ route('forum.newPost', ['id' => $classroom->id, 'sid' => $section->id, 'tid' => $topic->id]) }}" class="btn btn-primary">
                     Responder
                 </a>

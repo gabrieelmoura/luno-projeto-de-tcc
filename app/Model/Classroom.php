@@ -9,7 +9,7 @@ class Classroom extends Model implements ActualClassroom
 {
     protected $table = "luno_classrooms";
     protected $fillable = [
-        'start_date', 'end_date', 'hidden', 'max_students', 'description', 'welcome_text'
+        'start_date', 'end_date', 'max_students', 'description', 'welcome_text'
     ];
     protected $dates = [
         'start_date', 'end_date'
@@ -79,5 +79,10 @@ class Classroom extends Model implements ActualClassroom
         return $user && \DB::select("select 1 from luno_user_classroom where user_id = ? and classroom_id = ? and role = 'teacher'", [
             $user->id, $this->id
         ]);
+    }
+
+    public function topics()
+    {
+        return $this->hasManyThrough(Topic::class, Section::class);
     }
 }

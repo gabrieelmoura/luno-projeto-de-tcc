@@ -25,4 +25,9 @@ class Section extends Model
     {
         return $this->hasMany(Topic::class, "section_id", "id");
     }
+
+    public function posts()
+    {
+        return $this->hasManyThrough(Post::class, Topic::class);
+    }
 }

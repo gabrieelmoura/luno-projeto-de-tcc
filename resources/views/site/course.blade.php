@@ -65,7 +65,7 @@
                                 <td class="text-right" style="width: 100px; vertical-align: middle;">
                                     {{ $classroom->students_count }}/{{ $classroom->max_students }} <i class="fa fa-users"></i>
                                 </td>
-                                <td class="text-right" style="width: 220px; vertical-align: middle;">
+                                <td class="text-right" style="width: 220px; vertical-align: middle; white-space: nowrap">
                                     {{ $classroom->start_date->format('d/m/Y') }} - {{ $classroom->end_date->format('d/m/Y') }} <i class="fa fa-calendar"></i>
                                 </td>
                                 <td style="vertical-align: middle; width: 60px">
@@ -80,7 +80,7 @@
                                     @elseif(!$classroom->myRegistrations->last()->pivot->approved)
                                         Esperando aprovação
                                     @else
-                                        <a href="{{ route('forum.home', ['id' => $classroom->id]) }}" class="btn btn-primary">Acessar</a>
+                                        <a href="{{ route('forum.home', ['id' => $classroom->id]) }}" class="btn btn-sm btn-primary">Acessar</a>
                                     @endif
                                 </td>
                             </tr>
@@ -92,13 +92,14 @@
                 <h2>Ações</h2>
                 <div>
                     <hr>
-                    <a href="#" class="btn btn-primary btn-sm">Editar Curso</a>
-                    <a href="#" class="btn btn-primary btn-sm">Ocultar Curso</a>
-                    <a href="/nova-turma/{{ $course->id }}" class="btn btn-primary btn-sm">Criar Nova Turma</a>
-                    <hr>
-                    <a href="#" class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash"></i>
-                        Deletar Curso
+                    <a href="/nova-turma/{{ $course->id }}" class="btn btn-primary btn-sm">
+                        <i class="fa fa-plus"></i> Criar Nova Turma
+                    </a>
+                    <a href="{{ route('site.edit-course', ['id' => $course->id]) }}" class="btn btn-warning btn-sm">
+                        <i class="fa fa-pencil"></i> Editar Curso
+                    </a>
+                    <a href="{{ route('site.delete-course', ['id' => $course->id]) }}" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i> Deletar Curso
                     </a>
                 </div>
             @endif

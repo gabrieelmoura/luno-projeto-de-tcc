@@ -12,10 +12,10 @@
             <a class="btn btn-primary btn-sm" style="margin-top: -5px" href="{{ route('forum.newTopic', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                 <i class="fa fa-plus"></i> Criar Tópico
             </a>
-            <a class="btn btn-warning btn-sm" style="margin-top: -5px" href="{{ route('forum.newTopic', ['id' => $classroom->id, 'sid' => $section->id]) }}">
+            <a class="btn btn-warning btn-sm" style="margin-top: -5px" href="{{ route('forum.edit-section', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                 <i class="fa fa-pencil"></i> Editar Sessão
             </a>
-            <a class="btn btn-danger btn-sm" style="margin-top: -5px" href="{{ route('forum.newTopic', ['id' => $classroom->id, 'sid' => $section->id]) }}">
+            <a class="btn btn-danger btn-sm" style="margin-top: -5px" href="{{ route('forum.delete-section', ['id' => $classroom->id, 'sid' => $section->id]) }}">
                 <i class="fa fa-trash"></i> Deletar Sessão
             </a>
             <!-- <button class="btn btn-primary btn-sm" style="margin-top: -5px">

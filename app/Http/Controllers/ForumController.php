@@ -293,4 +293,98 @@ class ForumController extends Controller
         $task->delete();
         return redirect(route('forum.home', ['id' => $classroom->id]));
     }
+
+    public function editSection(ActualClassroom $classroom)
+    {
+        $section = $classroom->sections()->find(request()->route('sid'));
+        return view('forum.editSection', compact('classroom', 'section'));
+    }
+
+    public function editSectionAction(ActualClassroom $classroom)
+    {
+        $section = $classroom->sections()->find(request()->route('sid'));
+        $section->fill(request()->all());
+        $section->save();
+        return redirect(route('forum.section', ['id' => $classroom->id, 'sid' => $section->id]));
+    }
+
+    public function deleteSection(ActualClassroom $classroom)
+    {
+        $section = $classroom->sections()->find(request()->route('sid'));
+        return view('forum.deleteSection', compact('classroom', 'section'));
+    }
+
+    public function deleteSectionAction(ActualClassroom $classroom)
+    {
+        $section = $classroom->sections()->find(request()->route('sid'));
+        $section->delete();
+        return redirect(route('forum.home', ['id' => $classroom->id]));
+    }
+
+    public function deleteTopic(ActualClassroom $classroom)
+    {
+        $topic = $classroom->topics()->find(request()->route('tid'));
+        return view('forum.deleteTopic', compact('classroom', 'topic'));
+    }
+
+    public function deleteTopicAction(ActualClassroom $classroom)
+    {
+        $topic = $classroom->topics()->find(request()->route('tid'));
+        $topic->delete();
+        return redirect(route('forum.section', ['id' => $classroom->id, 'sid' => $topic->section_id]));
+    }
+
+    public function editPost(ActualClassroom $classroom)
+    {
+        $post = Post::with('topic.section')->find(request()->route('pid'));
+        $topic = $post->topic;
+        $section = $topic->section;
+        return view('forum.editPost', compact('classroom', 'post', 'topic', 'section'));
+    }
+
+    public function editPostAction(ActualClassroom $classroom)
+    {
+        $post = Post::with('topic.section')->find(request()->route('pid'));
+        $post->content = request('content');
+        $post->save();
+        return redirect(route('forum.topic', ['id' => $classroom->id, 'sid' => $post->topic->section->id, 'tid' => $post->topic->id]));
+    }
+
+    public function deletePost(ActualClassroom $classroom)
+    {
+        $post = Post::with('topic.section')->find(request()->route('pid'));
+        $topic = $post->topic;
+        $section = $topic->section;
+        return view('forum.deletePost', compact('classroom', 'post', 'topic', 'section'));
+    }
+
+    public function deletePostAction(ActualClassroom $classroom)
+    {
+        $post = Post::with('topic.section')->find(request()->route('pid'));
+        $post->delete();
+        return redirect(route('forum.topic', ['id' => $classroom->id, 'sid' => $post->topic->section->id, 'tid' => $post->topic->id]));
+    }
+
+    public function edit(ActualClassroom $classroom)
+    {
+        return view('forum.edit', compact('classroom'));
+    }
+
+    public function editAction(ActualClassroom $classroom)
+    {
+        $classroom->fill(request()->all());
+        $classroom->save();
+        return redirect(route('forum.home', ['id' => $classroom->id]));
+    }
+
+    public function delete(ActualClassroom $classroom)
+    {
+        return view('forum.delete', compact('classroom'));
+    }
+
+    public function deleteAction(ActualClassroom $classroom)
+    {
+        $classroom->delete();
+        return redirect(route('site.home'));
+    }
 }

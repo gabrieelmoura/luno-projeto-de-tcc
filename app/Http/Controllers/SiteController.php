@@ -55,16 +55,14 @@ class SiteController extends Controller
         return view('site.novoCurso');
     }
 
-    public function newCourseAction()
+    public function newCourseAction(StorageServiceContract $storage)
     {
         $course = new Course(request()->all());
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            $image = Media::newFromUploadedFile($file, 'course_avatar');
-            $image->title = "Avatar of " . request('course_name') . " - " . date('Y-m-d');
-            $image->owner_id = \Auth::id();
-            $image->save();
-            $course->image_id = $image->id;
+            $title = "Avatar of " . request('course_name') . " - " . date('Y-m-d');
+            $media = $storage->storeCourseImageFile($file, $title);
+            $course->image()->associate($media);
         }
         $course->creator_id = \Auth::id();
         $course->save();
@@ -83,7 +81,6 @@ class SiteController extends Controller
         $classroom = new Classroom(request()->all());
         $classroom->creator_id = \Auth::id();
         $classroom->course_id = request('course_id');
-        $classroom->hidden = (bool) request('hidden');
         $classroom->save();
         $classroom->registrations()->attach(\Auth::id(), [
             'approved' => true,
@@ -117,4 +114,34 @@ class SiteController extends Controller
         return redirect()->back();
     }
 
+    public function editCourse()
+    {
+        $course = Course::find(request()->route('id'));
+        return view('site.editCourse', compact('course'));
+    }
+
+    public function editCourseAction(StorageServiceContract $storage)
+    {
+        $course = Course::find(request()->route('id'));
+        $course->fill(request()->all());
+        if (request()->hasFile('image')) {
+            $media = $storage->storeCourseImageFile(request()->file('image'), "Foto do curso " . $course->course_name);
+            $course->image()->associate($media);
+        }
+        $course->save();
+        return redirect(route('site.course', ['id' => $course->id]));
+    }
+
+    public function deleteCourse()
+    {
+        $course = Course::find(request()->route('id'));
+        return view('site.deleteCourse', compact('course'));
+    }
+
+    public function deleteCourseAction()
+    {
+        $course = Course::find(request()->route('id'));
+        $course->delete();
+        return redirect(route('site.home'));
+    }
 }

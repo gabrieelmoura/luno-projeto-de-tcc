@@ -55,4 +55,17 @@ class StorageService implements StorageServiceContract
         $media->save();
         return $media;
     }
+
+    public function storeCourseImageFile($file, $title)
+    {
+        $media = new Media;
+        $media->mime = $file->getMimeType();
+        $media->size = $file->getClientSize();
+        $media->location = $file->store('course-image');
+        $media->media_type = 'avatar';
+        $media->title = $title;
+        $media->owner_id = \Auth::id();
+        $media->save();
+        return $media;
+    }
 }
